@@ -156,7 +156,7 @@ const Catalog = () => {
       </Card>
 
       {/* Course Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className={`grid grid-cols-1 gap-6 ${filteredCourses.length === 0 ? 'md:grid-cols-1' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
         {filteredCourses.map(course => <Card key={course.id} className="group hover:shadow-lg transition-all duration-200 cursor-pointer">
             <Link to={`/course/${course.id}`}>
               <CardContent className="p-0">
@@ -215,10 +215,10 @@ const Catalog = () => {
             </Link>
           </Card>)}
 
-        {/* Custom Training Card */}
-        <Link to="/custom-formation">
+        {/* Custom Training Card - Now expands when no results */}
+        <Link to="/custom-formation" className={filteredCourses.length === 0 ? 'md:col-span-2 lg:col-span-3' : ''}>
           <Card className="group hover:shadow-lg transition-all duration-200 border-dashed border-2 bg-gradient-to-br from-amber-50 to-yellow-50 border-amber-300 hover:from-amber-100 hover:to-yellow-100 hover:border-amber-400">
-            <CardContent className="p-6 h-full flex flex-col justify-between">
+            <CardContent className={`p-6 h-full flex flex-col justify-between ${filteredCourses.length === 0 ? 'text-center' : ''}`}>
               <div>
                 <div className="flex items-center justify-center mb-4">
                   <div className="h-16 w-16 rounded-full bg-amber-100 flex items-center justify-center">
@@ -226,10 +226,14 @@ const Catalog = () => {
                   </div>
                 </div>
                 
-                <h3 className="font-semibold text-lg mb-3 text-center text-amber-900">✨ Crea tu formación personalidada</h3>
+                <h3 className="font-semibold text-lg mb-3 text-center text-amber-900">✨ Crea tu formación personalizada</h3>
                 
-                <p className="text-amber-800 text-sm mb-4 text-center">¿Ninguna de nuestras formaciones encaja con lo que buscas? Crea una personalizada combinando nuestros cursos individuales.
-              </p>
+                <p className={`text-amber-800 text-sm mb-4 text-center ${filteredCourses.length === 0 ? 'text-base' : ''}`}>
+                  {filteredCourses.length === 0 
+                    ? '¿No encuentras lo que buscas? Crea una formación personalizada que se adapte exactamente a tus necesidades combinando nuestros cursos individuales.'
+                    : '¿Ninguna de nuestras formaciones encaja con lo que buscas? Crea una personalizada combinando nuestros cursos individuales.'
+                  }
+                </p>
                 
                 <div className="p-3 rounded-lg mb-4 bg-amber-100/0">
                   <p className="text-xs text-amber-700 text-center">✨ Requiere 1 día laborable de gestión</p>
@@ -244,16 +248,6 @@ const Catalog = () => {
         </Link>
       </div>
 
-      {/* Empty State */}
-      {filteredCourses.length === 0 && <Card>
-          <CardContent className="p-12 text-center">
-            <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-semibold mb-2">No se encontraron rutas</h3>
-            <p className="text-muted-foreground">
-              Intenta ajustar los filtros o términos de búsqueda
-            </p>
-          </CardContent>
-        </Card>}
 
       {/* Results Counter */}
       {filteredCourses.length > 0 && <div className="text-center text-sm text-muted-foreground">
