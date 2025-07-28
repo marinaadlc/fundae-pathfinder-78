@@ -238,9 +238,9 @@ const CustomFormationCreator = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left side - Form */}
         <div className="space-y-6">
-          <Card className="bg-amber-50">
+          <Card className="bg-gradient-to-br from-teal-50 to-cyan-50 border-teal-200">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-teal-800">
                 ✨ Parámetros de la formación
               </CardTitle>
             </CardHeader>
@@ -277,7 +277,7 @@ const CustomFormationCreator = () => {
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   <span>{customFormation.name}</span>
-                  <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 border-yellow-300">
+                  <Badge variant="secondary" className="bg-teal-100 text-teal-800 border-teal-300">
                     <Sparkles className="h-3 w-3 mr-1" />
                     Personalizada
                   </Badge>

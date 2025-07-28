@@ -541,7 +541,7 @@ const CreateAction = () => {
                   </Card>)}
 
                 {/* Custom Formation Card */}
-                <Card className="transition-all duration-200 cursor-pointer hover:shadow-lg border-dashed border-2 bg-gradient-to-br from-amber-50 to-yellow-50 border-amber-300 hover:from-amber-100 hover:to-yellow-100 hover:border-amber-400" onClick={() => navigate('/custom-formation')}>
+                <Card className="transition-all duration-200 cursor-pointer hover:shadow-lg border-dashed border-2 bg-gradient-to-br from-teal-50 to-cyan-50 border-teal-300 hover:from-teal-100 hover:to-cyan-100 hover:border-teal-400" onClick={() => navigate('/custom-formation')}>
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
@@ -549,13 +549,13 @@ const CreateAction = () => {
                           <h3 className="font-semibold text-teal-900">Formación personalizada</h3>
                           <Badge variant="outline" className="border-teal-500 text-teal-700 bg-teal-100">✨ Personalizable</Badge>
                         </div>
-                        <p className="text-sm text-amber-800">
+                        <p className="text-sm text-teal-800">
                           Crea tu propio itinerario formativo con IA que se adapte a tus necesidades específicas.
                         </p>
                       </div>
                       
                       <div className="flex items-center gap-4">
-                        <Button variant="outline" size="sm" className="border-amber-500 text-amber-700 hover:bg-amber-100" onClick={(e) => {
+                        <Button variant="outline" size="sm" className="border-teal-500 text-teal-700 hover:bg-teal-100" onClick={(e) => {
                           e.stopPropagation();
                           navigate('/custom-formation');
                         }}>
