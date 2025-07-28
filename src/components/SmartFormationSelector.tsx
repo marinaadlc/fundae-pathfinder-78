@@ -268,11 +268,11 @@ export const SmartFormationSelector = ({ courses }: SmartFormationSelectorProps)
               ))}
 
               {/* Custom Formation Card */}
-              <Card className="border-dashed border-2 border-amber-300 bg-gradient-to-br from-amber-50 to-yellow-50 hover:from-amber-100 hover:to-yellow-100 transition-all">
+              <Card className="border-dashed border-2 border-teal-300 bg-gradient-to-br from-teal-50 to-cyan-50 hover:from-teal-100 hover:to-cyan-100 transition-all">
                 <CardContent className="p-4 h-full flex flex-col justify-between">
                   <div className="text-center">
-                    <div className="h-12 w-12 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-3">
-                      <BookOpen className="h-6 w-6 text-amber-700" />
+                    <div className="h-12 w-12 rounded-full bg-teal-100 flex items-center justify-center mx-auto mb-3">
+                      <BookOpen className="h-6 w-6 text-teal-700" />
                     </div>
                     <h4 className="font-semibold text-sm text-teal-900 mb-2">
                       ✨ Formación Personalizada
@@ -284,7 +284,7 @@ export const SmartFormationSelector = ({ courses }: SmartFormationSelectorProps)
                   
                   <Button 
                     onClick={handleCreateCustomFormation}
-                    className="w-full border-amber-500 text-amber-700 hover:bg-amber-100" 
+                    className="w-full border-teal-500 text-teal-700 hover:bg-teal-100" 
                     variant="outline"
                     size="sm"
                   >
