@@ -36,15 +36,15 @@ const Layout = ({ children }: LayoutProps) => {
                 </div>
                 <span className="text-2xl font-bold text-foreground">BonificaPro</span>
               </Link>
-              <nav className="flex space-x-1">
+              <nav className="flex space-x-3">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`px-4 py-2 text-sm transition-colors no-underline ${
+                    className={`px-4 py-2 text-sm rounded-full transition-colors no-underline ${
                       item.current
-                        ? "text-[#00E5A0] bg-[#00E5A0]/10 border-b-2 border-[#00E5A0] font-medium"
-                        : "text-[#1e293b] hover:text-[#00E5A0] hover:bg-muted font-normal"
+                        ? "text-primary bg-primary/10 font-medium"
+                        : "text-muted-foreground hover:text-primary hover:bg-primary/5 font-normal"
                     }`}
                   >
                     {item.name}
