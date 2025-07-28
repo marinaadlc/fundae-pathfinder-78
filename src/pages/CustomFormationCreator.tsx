@@ -241,7 +241,6 @@ const CustomFormationCreator = () => {
           <Card className="bg-amber-50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                
                 ✨ Parámetros de la formación
               </CardTitle>
             </CardHeader>
