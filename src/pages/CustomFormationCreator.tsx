@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { toast } from "@/hooks/use-toast";
 import { Sparkles, X, Clock, BookOpen, Star, Loader2, RefreshCw, BadgeCent } from "lucide-react";
 interface Course {
@@ -27,6 +28,9 @@ const CustomFormationCreator = () => {
   const navigate = useNavigate();
   const [isGenerating, setIsGenerating] = useState(false);
   const [customFormation, setCustomFormation] = useState<CustomFormation | null>(null);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [courseToRemove, setCourseToRemove] = useState<number | null>(null);
+  const [studentsNeeded, setStudentsNeeded] = useState(0);
 
   // Form fields
   const [trainingFocus, setTrainingFocus] = useState("");
@@ -112,28 +116,52 @@ const CustomFormationCreator = () => {
   };
   const removeCourse = (courseId: number) => {
     if (!customFormation) return;
+    
     const updatedCourses = customFormation.courses.filter(course => course.id !== courseId);
-    const totalCredits = updatedCourses.reduce((sum, course) => sum + course.credits, 0);
     const totalHours = updatedCourses.reduce((sum, course) => {
       const hours = parseFloat(course.duration.split(' ')[0]) + (parseFloat(course.duration.split(' ')[2]) || 0) / 60;
       return sum + hours;
     }, 0);
 
-    // Calculate students needed if formation is below 18 hours
-    if (totalHours < 18) {
-      const studentsNeeded = Math.ceil(18 / totalHours);
-      toast({
-        title: "Formación por debajo del mínimo",
-        description: `Necesitarás que ${studentsNeeded} alumnos realicen esta formación para alcanzar el mínimo de horas requerido`,
-        variant: "destructive"
-      });
+    // Check if removing this course would make the formation too short (minimum 18 hours)
+    if (totalHours < 18 && totalHours > 0) {
+      const calculatedStudentsNeeded = Math.ceil(18 / totalHours);
+      setStudentsNeeded(calculatedStudentsNeeded);
+      setCourseToRemove(courseId);
+      setShowConfirmDialog(true);
+      return;
     }
+
+    // If no confirmation needed, proceed with removal
+    const totalCredits = updatedCourses.reduce((sum, course) => sum + course.credits, 0);
+    
     setCustomFormation({
       ...customFormation,
       courses: updatedCourses,
       totalDuration: `${Math.floor(totalHours)} h. ${Math.round(totalHours % 1 * 60)} min.`,
       totalCredits
     });
+  };
+
+  const confirmRemoveCourse = () => {
+    if (!customFormation || !courseToRemove) return;
+    
+    const updatedCourses = customFormation.courses.filter(course => course.id !== courseToRemove);
+    const totalCredits = updatedCourses.reduce((sum, course) => sum + course.credits, 0);
+    const totalHours = updatedCourses.reduce((sum, course) => {
+      const hours = parseFloat(course.duration.split(' ')[0]) + (parseFloat(course.duration.split(' ')[2]) || 0) / 60;
+      return sum + hours;
+    }, 0);
+
+    setCustomFormation({
+      ...customFormation,
+      courses: updatedCourses,
+      totalDuration: `${Math.floor(totalHours)} h. ${Math.round(totalHours % 1 * 60)} min.`,
+      totalCredits
+    });
+
+    setShowConfirmDialog(false);
+    setCourseToRemove(null);
   };
   const handleContinue = () => {
     if (!customFormation || customFormation.courses.length === 0) {
@@ -317,6 +345,27 @@ const CustomFormationCreator = () => {
         </div>
       </div>
 
-    </div>;
+      {/* Confirmation Dialog */}
+      <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirmar eliminación de curso</AlertDialogTitle>
+            <AlertDialogDescription>
+              Al eliminar este curso, la formación tendrá menos de 18 horas lectivas. 
+              Para cumplir con el mínimo requerido, necesitarás que al menos <strong>{studentsNeeded} alumnos</strong> realicen esta formación.
+              <br /><br />
+              ¿Estás seguro de que quieres continuar?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmRemoveCourse}>
+              Sí, eliminar curso
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </div>
+  );
 };
 export default CustomFormationCreator;
