@@ -287,7 +287,7 @@ const CustomFormationCreator = () => {
                 </div>
 
                 <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <span className="text-sm font-medium">Total:</span>
+                  <span className="text-sm font-medium">Resumen:</span>
                   <div className="flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-1">
                       <BookOpen className="h-3 w-3" />
