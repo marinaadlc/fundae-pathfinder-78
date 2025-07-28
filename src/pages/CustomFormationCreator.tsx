@@ -68,7 +68,7 @@ const CustomFormationCreator = () => {
     setTimeout(() => {
       // Extract key information from training focus
       const firstSkill = trainingFocus.split(/[,.]|\s+y\s+|\s+e\s+/)[0]?.trim() || "la competencia";
-      
+
       // Generate courses to meet minimum 18 hours
       const mockCourses: Course[] = [{
         id: 1,
@@ -128,7 +128,6 @@ const CustomFormationCreator = () => {
       });
       return;
     }
-
     setCustomFormation({
       ...customFormation,
       courses: updatedCourses,
@@ -136,7 +135,6 @@ const CustomFormationCreator = () => {
       totalCredits
     });
   };
-
   const handleContinue = () => {
     if (!customFormation || customFormation.courses.length === 0) {
       toast({
@@ -221,26 +219,12 @@ const CustomFormationCreator = () => {
             <CardContent className="space-y-4">
               <div>
                 <Label htmlFor="training-focus">En qué quieres formar a tus equipos *</Label>
-                <Textarea 
-                  id="training-focus" 
-                  placeholder="Ej: 'Excel avanzado', 'Liderazgo de equipos'"
-                  value={trainingFocus} 
-                  onChange={e => setTrainingFocus(e.target.value)} 
-                  rows={4}
-                  className="resize-none"
-                />
+                <Textarea id="training-focus" placeholder="Ej: 'Excel avanzado', 'Liderazgo de equipos'" value={trainingFocus} onChange={e => setTrainingFocus(e.target.value)} rows={4} className="resize-none" />
               </div>
 
               <div>
                 <Label htmlFor="team-role">Rol de las personas*</Label>
-                <Textarea 
-                  id="team-role" 
-                  placeholder="Ej: 'Analistas financieros con experiencia básica en Excel', 'Desarrolladores junior con conocimientos de JavaScript'"
-                  value={teamRole} 
-                  onChange={e => setTeamRole(e.target.value)} 
-                  rows={4}
-                  className="resize-none"
-                />
+                <Textarea id="team-role" placeholder="Ej: 'Analistas financieros con experiencia básica en Excel', 'Desarrolladores junior con conocimientos de JavaScript'" value={teamRole} onChange={e => setTeamRole(e.target.value)} rows={4} className="resize-none" />
               </div>
 
               <Button onClick={handleGenerateFormation} disabled={isGenerating || !trainingFocus.trim() || !teamRole.trim()} className="w-full" variant={customFormation ? "outline" : "default"}>
@@ -275,10 +259,7 @@ const CustomFormationCreator = () => {
                     <BookOpen className="h-4 w-4" />
                     {customFormation.courses.length} cursos
                   </div>
-                  <div className="flex items-center gap-1">
-                    <Clock className="h-4 w-4" />
-                    {customFormation.totalDuration}
-                  </div>
+                  
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
