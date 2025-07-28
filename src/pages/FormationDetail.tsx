@@ -149,7 +149,7 @@ const FormationDetail = () => {
         <CardContent className="p-0">
           <div className="flex flex-col md:flex-row relative">
             {/* Image Section */}
-            <div className="w-full md:w-64 h-48 md:h-auto bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center relative overflow-hidden">
+            <div className="w-full md:w-64 h-48 md:h-auto bg-[#010118] flex items-center justify-center relative overflow-hidden">
               <BookOpen className="h-16 w-16 text-primary/60" />
               {formation.isPopular && <div className="absolute top-4 right-4 flex items-center gap-1 bg-orange-500 text-white px-3 py-2 rounded-full">
                   <Star className="h-4 w-4 fill-current" />
