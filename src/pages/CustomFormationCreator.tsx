@@ -30,16 +30,10 @@ const CustomFormationCreator = () => {
   const navigate = useNavigate();
   const [isGenerating, setIsGenerating] = useState(false);
   const [customFormation, setCustomFormation] = useState<CustomFormation | null>(null);
-  const [showMinHoursAlert, setShowMinHoursAlert] = useState(false);
-  const [minHoursData, setMinHoursData] = useState<{
-    currentHours: number;
-    minHours: number;
-    additionalStudents: number;
-  } | null>(null);
 
   // Form fields
-  const [numberOfStudents, setNumberOfStudents] = useState<number>(5);
-  const [formationDetails, setFormationDetails] = useState("");
+  const [trainingFocus, setTrainingFocus] = useState("");
+  const [teamRole, setTeamRole] = useState("");
 
   // Load parameters from smart selector if available
   useEffect(() => {
@@ -47,8 +41,8 @@ const CustomFormationCreator = () => {
     if (savedParams) {
       try {
         const params = JSON.parse(savedParams);
-        setNumberOfStudents(parseInt(params.numberOfStudents) || 5);
-        setFormationDetails(params.formationDetails || "");
+        setTrainingFocus(params.trainingFocus || "");
+        setTeamRole(params.teamRole || "");
 
         // Load generated formation if available
         if (params.generatedFormation) {
@@ -63,10 +57,10 @@ const CustomFormationCreator = () => {
     }
   }, []);
   const handleGenerateFormation = async () => {
-    if (!formationDetails.trim()) {
+    if (!trainingFocus.trim() || !teamRole.trim()) {
       toast({
-        title: "Campo requerido",
-        description: "Por favor, describe los detalles de la formación",
+        title: "Campos requeridos",
+        description: "Por favor, completa todos los campos obligatorios",
         variant: "destructive"
       });
       return;
@@ -75,41 +69,42 @@ const CustomFormationCreator = () => {
 
     // Simulate AI API call
     setTimeout(() => {
-      // Extract key information from formation details
-      const firstSkill = formationDetails.split(/[,.]|\s+y\s+|\s+e\s+/)[0]?.trim() || "la competencia";
+      // Extract key information from training focus
+      const firstSkill = trainingFocus.split(/[,.]|\s+y\s+|\s+e\s+/)[0]?.trim() || "la competencia";
       
+      // Generate courses to meet minimum 18 hours
       const mockCourses: Course[] = [{
         id: 1,
         name: "Fundamentos de " + firstSkill,
         category: "Fundamentos",
-        duration: "3 h. 30 min.",
-        description: `Conceptos básicos y fundamentos de ${firstSkill} basados en los requerimientos especificados`,
-        credits: 3,
+        duration: "6 h. 00 min.",
+        description: `Conceptos básicos y fundamentos de ${firstSkill} para ${teamRole}`,
+        credits: 6,
         rating: 4.6
       }, {
         id: 2,
         name: "Aplicación práctica",
         category: "Práctica",
-        duration: "4 h. 45 min.",
-        description: `Ejercicios prácticos y casos de uso específicos según los detalles proporcionados`,
-        credits: 4,
+        duration: "8 h. 00 min.",
+        description: `Ejercicios prácticos específicos para ${teamRole} en ${firstSkill}`,
+        credits: 8,
         rating: 4.7
       }, {
         id: 3,
         name: "Herramientas avanzadas",
         category: "Avanzado",
-        duration: "2 h. 15 min.",
-        description: `Herramientas y técnicas avanzadas para optimizar el trabajo en ${firstSkill}`,
-        credits: 2,
+        duration: "4 h. 30 min.",
+        description: `Herramientas y técnicas avanzadas para optimizar el trabajo de ${teamRole} en ${firstSkill}`,
+        credits: 4,
         rating: 4.8
       }];
       const totalCredits = mockCourses.reduce((sum, course) => sum + course.credits, 0);
       const totalHours = mockCourses.reduce((sum, course) => {
-        const hours = parseFloat(course.duration.split(' ')[0]);
+        const hours = parseFloat(course.duration.split(' ')[0]) + (parseFloat(course.duration.split(' ')[2]) || 0) / 60;
         return sum + hours;
       }, 0);
       setCustomFormation({
-        name: `Formación personalizada: ${firstSkill}`,
+        name: `Formación personalizada: ${firstSkill} para ${teamRole}`,
         category: "Personalizada",
         courses: mockCourses,
         totalDuration: `${Math.floor(totalHours)} h. ${Math.round(totalHours % 1 * 60)} min.`,
@@ -118,43 +113,22 @@ const CustomFormationCreator = () => {
       setIsGenerating(false);
     }, 2000);
   };
-  // Calculate minimum hours required based on number of students
-  const getMinHoursRequired = (students: number) => {
-    // Minimum hours: 8 hours for 1-5 students, 12 hours for 6-10, 16 hours for 11-15, etc.
-    if (students <= 5) return 8;
-    if (students <= 10) return 12;
-    if (students <= 15) return 16;
-    if (students <= 20) return 20;
-    return 24;
-  };
-
   const removeCourse = (courseId: number) => {
     if (!customFormation) return;
     const updatedCourses = customFormation.courses.filter(course => course.id !== courseId);
     const totalCredits = updatedCourses.reduce((sum, course) => sum + course.credits, 0);
     const totalHours = updatedCourses.reduce((sum, course) => {
-      const hours = parseFloat(course.duration.split(' ')[0]);
+      const hours = parseFloat(course.duration.split(' ')[0]) + (parseFloat(course.duration.split(' ')[2]) || 0) / 60;
       return sum + hours;
     }, 0);
 
-    const minHoursRequired = getMinHoursRequired(numberOfStudents);
-    
-    // Check if removing this course would make the formation too short
-    if (totalHours < minHoursRequired) {
-      // Calculate how many fewer students would be needed
-      let additionalStudents = 0;
-      let testStudents = numberOfStudents - 1;
-      while (testStudents > 0 && getMinHoursRequired(testStudents) > totalHours) {
-        additionalStudents++;
-        testStudents--;
-      }
-      
-      setMinHoursData({
-        currentHours: totalHours,
-        minHours: minHoursRequired,
-        additionalStudents: additionalStudents
+    // Check if removing this course would make the formation too short (minimum 18 hours)
+    if (totalHours < 18) {
+      toast({
+        title: "Duración insuficiente",
+        description: "La formación debe tener un mínimo de 18 horas lectivas",
+        variant: "destructive"
       });
-      setShowMinHoursAlert(true);
       return;
     }
 
@@ -166,10 +140,6 @@ const CustomFormationCreator = () => {
     });
   };
 
-  const handleRegenerateFormation = () => {
-    setShowMinHoursAlert(false);
-    handleGenerateFormation();
-  };
   const handleContinue = () => {
     if (!customFormation || customFormation.courses.length === 0) {
       toast({
@@ -187,7 +157,7 @@ const CustomFormationCreator = () => {
       category: customFormation.category,
       courses: customFormation.courses.length,
       duration: customFormation.totalDuration,
-      description: `Formación personalizada creada para ${numberOfStudents} alumnos según especificaciones detalladas`,
+      description: `Formación personalizada creada según especificaciones detalladas`,
       subFormations: customFormation.courses.map(course => ({
         name: course.name,
         category: course.category,
@@ -253,24 +223,32 @@ const CustomFormationCreator = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <Label htmlFor="students">Número de alumnos</Label>
-                <Input id="students" type="number" min="1" max="50" value={numberOfStudents} onChange={e => setNumberOfStudents(parseInt(e.target.value) || 1)} />
-              </div>
-
-              <div>
-                <Label htmlFor="formation-details">Detalles de la formación *</Label>
+                <Label htmlFor="training-focus">En qué quieres formar a tus equipos *</Label>
                 <Textarea 
-                  id="formation-details" 
-                  placeholder="Describe el rol y las necesidades formativas de las personas que quieres formar.
-            Ej:'Formación en Excel avanzado para analistas financieros con experiencia básica. Necesitan aprender macros, tablas dinámicas y análisis de datos para reportes mensuales.'"
-                  value={formationDetails} 
-                  onChange={e => setFormationDetails(e.target.value)} 
-                  rows={8}
+                  id="training-focus" 
+                  placeholder="Describe en qué competencias, habilidades o conocimientos quieres formar a tu equipo.
+Ej: 'Excel avanzado', 'Liderazgo de equipos', 'Desarrollo web con React'"
+                  value={trainingFocus} 
+                  onChange={e => setTrainingFocus(e.target.value)} 
+                  rows={4}
                   className="resize-none"
                 />
               </div>
 
-              <Button onClick={handleGenerateFormation} disabled={isGenerating || !formationDetails.trim()} className="w-full" variant={customFormation ? "outline" : "default"}>
+              <div>
+                <Label htmlFor="team-role">Rol de las personas *</Label>
+                <Textarea 
+                  id="team-role" 
+                  placeholder="Describe el rol y perfil de las personas que recibirán la formación.
+Ej: 'Analistas financieros con experiencia básica en Excel', 'Desarrolladores junior con conocimientos de JavaScript'"
+                  value={teamRole} 
+                  onChange={e => setTeamRole(e.target.value)} 
+                  rows={4}
+                  className="resize-none"
+                />
+              </div>
+
+              <Button onClick={handleGenerateFormation} disabled={isGenerating || !trainingFocus.trim() || !teamRole.trim()} className="w-full" variant={customFormation ? "outline" : "default"}>
                 {isGenerating ? <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                     {customFormation ? "Regenerando formación..." : "Generando formación..."}
@@ -310,7 +288,7 @@ const CustomFormationCreator = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-muted-foreground">
-                  Formación generada para {numberOfStudents} alumnos según los detalles especificados
+                  Formación personalizada generada según las especificaciones proporcionadas
                 </p>
 
                 <div className="space-y-3">
@@ -345,7 +323,7 @@ const CustomFormationCreator = () => {
                     <span>{customFormation.totalDuration}</span>
                     <Badge variant="secondary" className="flex items-center gap-1">
                       <BadgeCent className="h-3 w-3" />
-                      {customFormation.totalCredits * numberOfStudents} créditos total ({customFormation.totalCredits} × {numberOfStudents} alumnos)
+                      {customFormation.totalCredits} créditos/alumno
                     </Badge>
                   </div>
                 </div>
@@ -363,28 +341,6 @@ const CustomFormationCreator = () => {
         </div>
       </div>
 
-      {/* Alert Dialog for minimum hours warning */}
-      <AlertDialog open={showMinHoursAlert} onOpenChange={setShowMinHoursAlert}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Duración insuficiente</AlertDialogTitle>
-            <AlertDialogDescription>
-              La formación actual tiene {minHoursData?.currentHours || 0} horas, pero necesita al menos {minHoursData?.minHours || 0} horas para {numberOfStudents} alumnos.
-              {minHoursData?.additionalStudents && minHoursData.additionalStudents > 0 && (
-                <span className="block mt-2">
-                  <strong>Alternativa:</strong> Podrías impartir esta formación a {numberOfStudents - minHoursData.additionalStudents} alumnos o menos.
-                </span>
-              )}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={handleRegenerateFormation}>
-              Regenerar formación
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </div>;
 };
 export default CustomFormationCreator;
