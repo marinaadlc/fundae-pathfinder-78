@@ -226,16 +226,13 @@ const Catalog = () => {
                   </div>
                 </div>
                 
-                <h3 className="font-semibold text-lg mb-3 text-center text-amber-900">
-                  ✨ Formación personalizada
-                </h3>
+                <h3 className="font-semibold text-lg mb-3 text-center text-amber-900">✨ Crea tu formación personalidada</h3>
                 
-                <p className="text-amber-800 text-sm mb-4 text-center">
-                  ¿No encuentras lo que buscas? Nuestra IA creará una formación a medida para tu equipo.
-                </p>
+                <p className="text-amber-800 text-sm mb-4 text-center">¿Ninguna de nuestras formaciones encaja con lo que buscas? Crea una personalizada combinando nuestros cursos individuales.
+              </p>
                 
                 <div className="p-3 rounded-lg mb-4 bg-amber-100/0">
-                  <p className="text-xs text-amber-700 text-center">✨ Se gestiona en 1 día laborable</p>
+                  <p className="text-xs text-amber-700 text-center">✨ Requiere 1 día laborable de gestión</p>
                 </div>
               </div>
               
