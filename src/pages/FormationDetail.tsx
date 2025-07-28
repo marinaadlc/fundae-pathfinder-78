@@ -198,21 +198,9 @@ const FormationDetail = () => {
                     <p className="text-sm text-muted-foreground">Alumnos matriculados</p>
                     <div className="flex items-center gap-2">
                       <div className="flex -space-x-2">
-                        <img 
-                          src={avatar1} 
-                          alt="Student avatar" 
-                          className="w-6 h-6 rounded-full border-2 border-white object-cover"
-                        />
-                        <img 
-                          src={avatar2} 
-                          alt="Student avatar" 
-                          className="w-6 h-6 rounded-full border-2 border-white object-cover"
-                        />
-                        <img 
-                          src={avatar3} 
-                          alt="Student avatar" 
-                          className="w-6 h-6 rounded-full border-2 border-white object-cover"
-                        />
+                        <img src={avatar1} alt="Student avatar" className="w-6 h-6 rounded-full border-2 border-white object-cover" />
+                        <img src={avatar2} alt="Student avatar" className="w-6 h-6 rounded-full border-2 border-white object-cover" />
+                        <img src={avatar3} alt="Student avatar" className="w-6 h-6 rounded-full border-2 border-white object-cover" />
                       </div>
                       <span className="font-semibold">{formation.students.toLocaleString()}</span>
                     </div>
@@ -220,7 +208,7 @@ const FormationDetail = () => {
                 </div>
               </div>
               
-              <Button size="lg" className="px-8" onClick={handleCreateAction}>
+              <Button size="lg" onClick={handleCreateAction} className="px-8 rounded-3xl">
                 <Play className="h-5 w-5 mr-2" />
                 Crear acción formativa con esta formación
               </Button>
