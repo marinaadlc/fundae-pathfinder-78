@@ -101,7 +101,7 @@ const CustomFormationCreator = () => {
         return sum + hours;
       }, 0);
       setCustomFormation({
-        name: `Formación personalizada: ${firstSkill} para ${teamRole}`,
+        name: `${firstSkill} para ${teamRole}`,
         category: "Personalizada",
         courses: mockCourses,
         totalDuration: `${Math.floor(totalHours)} h. ${Math.round(totalHours % 1 * 60)} min.`,
