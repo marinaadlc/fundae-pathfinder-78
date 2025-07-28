@@ -161,8 +161,8 @@ const Catalog = () => {
             <Link to={`/course/${course.id}`}>
               <CardContent className="p-0">
                 {/* Course Image Placeholder */}
-                <div className="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center relative overflow-hidden">
-                  <BookOpen className="h-16 w-16 text-primary/60" />
+                <div className="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center relative overflow-hidden bg-[#010118]">
+                  <BookOpen className="h-16 w-16 text-primary/60 bg-[#000a05]/0" />
                   {course.isPopular && <div className="absolute top-3 right-3 flex items-center gap-1 bg-orange-500 text-white px-2 py-1 rounded-full text-xs">
                       <Star className="h-3 w-3 fill-current" />
                       <span>Popular</span>
@@ -229,10 +229,7 @@ const Catalog = () => {
                 <h3 className="font-semibold text-lg mb-3 text-center text-amber-900">✨ Crea tu formación personalizada</h3>
                 
                 <p className={`text-amber-800 text-sm mb-4 text-center ${filteredCourses.length === 0 ? 'text-base' : ''}`}>
-                  {filteredCourses.length === 0 
-                    ? '¿No encuentras lo que buscas? Crea una formación personalizada que se adapte exactamente a tus necesidades combinando nuestros cursos individuales.'
-                    : '¿Ninguna de nuestras formaciones encaja con lo que buscas? Crea una personalizada combinando nuestros cursos individuales.'
-                  }
+                  {filteredCourses.length === 0 ? '¿No encuentras lo que buscas? Crea una formación personalizada que se adapte exactamente a tus necesidades combinando nuestros cursos individuales.' : '¿Ninguna de nuestras formaciones encaja con lo que buscas? Crea una personalizada combinando nuestros cursos individuales.'}
                 </p>
                 
                 <div className="p-3 rounded-lg mb-4 bg-amber-100/0">
