@@ -195,7 +195,8 @@ const CustomFormationCreator = () => {
     // Navigate to create action with the custom formation
     navigate(`/create-action?step=2&customFormation=true`);
   };
-  return <div className="space-y-6">
+  return (
+    <div className="space-y-6">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-foreground mb-2">Crear formación personalizada</h1>
