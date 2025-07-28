@@ -119,14 +119,14 @@ const CustomFormationCreator = () => {
       return sum + hours;
     }, 0);
 
-    // Check if removing this course would make the formation too short (minimum 18 hours)
+    // Calculate students needed if formation is below 18 hours
     if (totalHours < 18) {
+      const studentsNeeded = Math.ceil(18 / totalHours);
       toast({
-        title: "Duración insuficiente",
-        description: "La formación debe tener un mínimo de 18 horas lectivas",
+        title: "Formación por debajo del mínimo",
+        description: `Necesitarás que ${studentsNeeded} alumnos realicen esta formación para alcanzar el mínimo de horas requerido`,
         variant: "destructive"
       });
-      return;
     }
     setCustomFormation({
       ...customFormation,
