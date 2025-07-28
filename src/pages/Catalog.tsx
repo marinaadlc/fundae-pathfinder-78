@@ -217,27 +217,27 @@ const Catalog = () => {
 
         {/* Custom Training Card - Now expands when no results */}
         <Link to="/custom-formation" className={filteredCourses.length === 0 ? 'md:col-span-2 lg:col-span-3' : ''}>
-          <Card className="group hover:shadow-lg transition-all duration-200 border-dashed border-2 bg-gradient-to-br from-amber-50 to-yellow-50 border-amber-300 hover:from-amber-100 hover:to-yellow-100 hover:border-amber-400">
+          <Card className="group hover:shadow-lg transition-all duration-200 border-dashed border-2 bg-gradient-to-br from-teal-50 to-cyan-50 border-teal-300 hover:from-teal-100 hover:to-cyan-100 hover:border-teal-400">
             <CardContent className={`p-6 h-full flex flex-col justify-between ${filteredCourses.length === 0 ? 'text-center' : ''}`}>
               <div>
                 <div className="flex items-center justify-center mb-4">
-                  <div className="h-16 w-16 rounded-full bg-amber-100 flex items-center justify-center">
-                    <BookOpen className="h-8 w-8 text-amber-700" />
+                  <div className="h-16 w-16 rounded-full bg-teal-100 flex items-center justify-center">
+                    <BookOpen className="h-8 w-8 text-teal-700" />
                   </div>
                 </div>
                 
-                <h3 className="font-semibold text-lg mb-3 text-center text-amber-900">✨ Crea tu formación personalizada</h3>
+                <h3 className="font-semibold text-lg mb-3 text-center text-teal-900">✨ Crea tu formación personalizada</h3>
                 
-                <p className={`text-amber-800 text-sm mb-4 text-center ${filteredCourses.length === 0 ? 'text-base' : ''}`}>
+                <p className={`text-teal-800 text-sm mb-4 text-center ${filteredCourses.length === 0 ? 'text-base' : ''}`}>
                   {filteredCourses.length === 0 ? '¿No encuentras lo que buscas? Crea una formación personalizada que se adapte exactamente a tus necesidades combinando nuestros cursos individuales.' : '¿Ninguna de nuestras formaciones encaja con lo que buscas? Crea una personalizada combinando nuestros cursos individuales.'}
                 </p>
                 
                 <div className="p-3 rounded-lg mb-4 bg-amber-100/0">
-                  <p className="text-xs text-amber-700 text-center">✨ Requiere 1 día laborable de gestión</p>
+                  <p className="text-xs text-teal-700 text-center">✨ Requiere 1 día laborable de gestión</p>
                 </div>
               </div>
               
-              <Button className="w-full border-amber-500 text-amber-700 hover:bg-amber-100" variant="outline">
+              <Button className="w-full border-teal-500 text-teal-700 hover:bg-teal-100" variant="outline">
                 Crear formación personalizada
               </Button>
             </CardContent>

@@ -274,10 +274,10 @@ export const SmartFormationSelector = ({ courses }: SmartFormationSelectorProps)
                     <div className="h-12 w-12 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-3">
                       <BookOpen className="h-6 w-6 text-amber-700" />
                     </div>
-                    <h4 className="font-semibold text-sm text-amber-900 mb-2">
+                    <h4 className="font-semibold text-sm text-teal-900 mb-2">
                       ✨ Formación Personalizada
                     </h4>
-                    <p className="text-xs text-amber-700 mb-3">
+                    <p className="text-xs text-teal-700 mb-3">
                       Genera una formación específica para tus necesidades
                     </p>
                   </div>

@@ -546,8 +546,8 @@ const CreateAction = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-semibold text-amber-900">Formación personalizada</h3>
-                          <Badge variant="outline" className="border-amber-500 text-amber-700 bg-amber-100">✨ Personalizable</Badge>
+                          <h3 className="font-semibold text-teal-900">Formación personalizada</h3>
+                          <Badge variant="outline" className="border-teal-500 text-teal-700 bg-teal-100">✨ Personalizable</Badge>
                         </div>
                         <p className="text-sm text-amber-800">
                           Crea tu propio itinerario formativo con IA que se adapte a tus necesidades específicas.
