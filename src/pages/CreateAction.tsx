@@ -519,8 +519,8 @@ const CreateAction = () => {
                     </CardContent>
                     
                     {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-800/90 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                      <div className="flex items-center gap-3">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/30 to-gray-900/90 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-end">
+                      <div className="flex items-center gap-3 p-6">
                         {isFormationSelected(formation) ? <Button size="sm" onClick={(e) => {
                             e.stopPropagation();
                             handleSelectFormation(formation);
@@ -538,7 +538,7 @@ const CreateAction = () => {
                             if (selectedFormationDetail?.id !== formation.id) {
                               setSelectedFormationDetail(formation);
                             }
-                          }} className="border-white text-white hover:bg-white hover:text-slate-900">
+                          }} className="border-white text-black bg-white hover:bg-gray-100 hover:text-black">
                           Ver los cursos
                         </Button>
                       </div>
