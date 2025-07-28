@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, Clock, BookOpen, Star, Users, CreditCard, BadgeCent } from "lucide-react";
 import { Link } from "react-router-dom";
-import { SmartFormationSelector } from "@/components/SmartFormationSelector";
+
 import avatar1 from "@/assets/avatar1.png";
 import avatar2 from "@/assets/avatar2.png";
 import avatar3 from "@/assets/avatar3.png";
@@ -116,18 +116,30 @@ const Catalog = () => {
         <p className="text-muted-foreground">Explora las formaciones bonificables que puedes lanzar a tu equipo</p>
       </div>
 
-      {/* Smart Formation Selector */}
-      <SmartFormationSelector courses={mockCourses} />
+      {/* Main Search */}
+      <div className="flex flex-col items-center justify-center py-12 space-y-8">
+        <div className="text-center space-y-4">
+          <h2 className="text-4xl font-bold text-foreground">Encuentra tu formación ideal</h2>
+          <p className="text-xl text-muted-foreground max-w-2xl">
+            Busca entre cientos de rutas formativas bonificables para tu equipo
+          </p>
+        </div>
+        
+        <div className="w-full max-w-2xl relative">
+          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-muted-foreground h-6 w-6" />
+          <Input 
+            placeholder="Buscar rutas formativas..." 
+            value={searchTerm} 
+            onChange={e => setSearchTerm(e.target.value)} 
+            className="pl-16 h-16 text-lg rounded-2xl border-2 focus:border-primary shadow-lg"
+          />
+        </div>
+      </div>
 
       {/* Filters */}
       <Card>
         <CardContent className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <Input placeholder="Buscar rutas formativas..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10" />
-            </div>
-            
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-md mx-auto">
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
               <SelectTrigger>
                 <SelectValue placeholder="Todas las categorías" />
