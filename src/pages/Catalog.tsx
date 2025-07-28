@@ -111,8 +111,8 @@ const Catalog = () => {
   return <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-foreground mb-2">Catálogo de Formaciones</h1>
-        <p className="text-muted-foreground">Explora las formaciones bonificables que puedes lanzar a tu equipo</p>
+        
+        
       </div>
 
       {/* Main Search */}
@@ -124,7 +124,7 @@ const Catalog = () => {
         
         <div className="w-full max-w-2xl relative">
           <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-muted-foreground h-6 w-6" />
-          <Input placeholder="Buscar rutas formativas..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-16 h-16 text-lg rounded-2xl border-2 focus:border-primary shadow-lg" />
+          <Input placeholder="Buscar formaciones..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-16 h-16 text-lg rounded-2xl border-2 focus:border-primary shadow-lg" />
         </div>
       </div>
 
