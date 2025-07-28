@@ -223,8 +223,7 @@ const CustomFormationCreator = () => {
                 <Label htmlFor="training-focus">En qué quieres formar a tus equipos *</Label>
                 <Textarea 
                   id="training-focus" 
-                  placeholder="Describe en qué competencias, habilidades o conocimientos quieres formar a tu equipo.
-Ej: 'Excel avanzado', 'Liderazgo de equipos', 'Desarrollo web con React'"
+                  placeholder="Ej: 'Excel avanzado', 'Liderazgo de equipos'"
                   value={trainingFocus} 
                   onChange={e => setTrainingFocus(e.target.value)} 
                   rows={4}
