@@ -232,11 +232,10 @@ const CustomFormationCreator = () => {
               </div>
 
               <div>
-                <Label htmlFor="team-role">Rol de las personas *</Label>
+                <Label htmlFor="team-role">Rol de las personas*</Label>
                 <Textarea 
                   id="team-role" 
-                  placeholder="Describe el rol y perfil de las personas que recibirán la formación.
-Ej: 'Analistas financieros con experiencia básica en Excel', 'Desarrolladores junior con conocimientos de JavaScript'"
+                  placeholder="Ej: 'Analistas financieros con experiencia básica en Excel', 'Desarrolladores junior con conocimientos de JavaScript'"
                   value={teamRole} 
                   onChange={e => setTeamRole(e.target.value)} 
                   rows={4}
