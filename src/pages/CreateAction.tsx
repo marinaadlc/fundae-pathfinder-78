@@ -482,7 +482,7 @@ const CreateAction = () => {
              
 
               <div className="space-y-4">
-                {filteredFormations.map(formation => <Card key={formation.id} className={`transition-all duration-200 cursor-pointer hover:shadow-md ${isFormationSelected(formation) ? "bg-primary/10 border-primary shadow-lg" : ""} ${selectedFormationDetail?.id === formation.id ? "bg-accent/50 shadow-lg" : ""}`} onMouseEnter={() => setHoveredFormation(formation)} onMouseLeave={() => setHoveredFormation(null)} onClick={() => handleSelectFormation(formation)}>
+                {filteredFormations.map(formation => <Card key={formation.id} className={`relative transition-all duration-300 cursor-pointer hover:shadow-lg overflow-hidden group ${isFormationSelected(formation) ? "bg-primary/10 border-primary shadow-lg" : ""} ${selectedFormationDetail?.id === formation.id ? "bg-accent/50 shadow-lg" : ""}`} onMouseEnter={() => setHoveredFormation(formation)} onMouseLeave={() => setHoveredFormation(null)} onClick={() => handleSelectFormation(formation)}>
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
@@ -514,30 +514,35 @@ const CreateAction = () => {
                               <span>{formation.duration}</span>
                             </div>
                           </div>
-
-                          {(hoveredFormation?.id === formation.id || selectedFormationDetail?.id === formation.id) && <Button variant="outline" size="sm" onClick={(e) => {
-                              e.stopPropagation();
-                              if (selectedFormationDetail?.id !== formation.id) {
-                                setSelectedFormationDetail(formation);
-                              }
-                            }} disabled={selectedFormationDetail?.id === formation.id} className={selectedFormationDetail?.id === formation.id ? "opacity-60 cursor-default" : ""}>
-                              Ver los cursos →
-                            </Button>}
-
-                          {isFormationSelected(formation) ? <Button size="sm" onClick={(e) => {
-                              e.stopPropagation();
-                              handleSelectFormation(formation);
-                            }} className="bg-primary text-primary-foreground">
-                              Seleccionada
-                            </Button> : <Button variant="outline" size="sm" onClick={(e) => {
-                              e.stopPropagation();
-                              handleSelectFormation(formation);
-                            }}>
-                              Seleccionar
-                            </Button>}
                         </div>
                       </div>
                     </CardContent>
+                    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-slate-800/90 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                      <div className="flex items-center gap-3">
+                        {isFormationSelected(formation) ? <Button size="sm" onClick={(e) => {
+                            e.stopPropagation();
+                            handleSelectFormation(formation);
+                          }} className="bg-white text-slate-900 hover:bg-gray-100">
+                            Seleccionada
+                          </Button> : <Button size="sm" onClick={(e) => {
+                            e.stopPropagation();
+                            handleSelectFormation(formation);
+                          }} className="bg-white text-slate-900 hover:bg-gray-100">
+                            Seleccionar
+                          </Button>}
+                        
+                        <Button variant="outline" size="sm" onClick={(e) => {
+                            e.stopPropagation();
+                            if (selectedFormationDetail?.id !== formation.id) {
+                              setSelectedFormationDetail(formation);
+                            }
+                          }} className="border-white text-white hover:bg-white hover:text-slate-900">
+                          Ver los cursos
+                        </Button>
+                      </div>
+                    </div>
                   </Card>)}
 
                 {/* Custom Formation Card */}
