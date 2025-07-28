@@ -254,13 +254,6 @@ const CustomFormationCreator = () => {
                     Personalizada
                   </Badge>
                 </CardTitle>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <BookOpen className="h-4 w-4" />
-                    {customFormation.courses.length} cursos
-                  </div>
-                  
-                </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-muted-foreground">
@@ -296,7 +289,14 @@ const CustomFormationCreator = () => {
                 <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                   <span className="text-sm font-medium">Total:</span>
                   <div className="flex items-center gap-4 text-sm">
-                    <span>{customFormation.totalDuration}</span>
+                    <div className="flex items-center gap-1">
+                      <BookOpen className="h-3 w-3" />
+                      {customFormation.courses.length} cursos
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
+                      {customFormation.totalDuration}
+                    </div>
                     <Badge variant="secondary" className="flex items-center gap-1">
                       <BadgeCent className="h-3 w-3" />
                       {customFormation.totalCredits} créditos/alumno
