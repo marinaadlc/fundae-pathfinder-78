@@ -25,7 +25,6 @@ const formSchema = z.object({
   startDate: z.date({
     required_error: "La fecha de inicio es requerida",
   }),
-  weeklyDedication: z.number().min(2, "Mínimo 2 horas semanales").max(40, "Máximo 40 horas semanales"),
 });
 
 interface Student {
@@ -184,7 +183,6 @@ export default function EditAction() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       startDate: new Date(),
-      weeklyDedication: 2,
     },
   });
 
@@ -213,7 +211,6 @@ export default function EditAction() {
     // Update form defaults when action is loaded
     form.reset({
       startDate: new Date(actionDetail.startDate),
-      weeklyDedication: actionDetail.weeklyDedication,
     });
   }, [id, form]);
 
@@ -239,8 +236,9 @@ export default function EditAction() {
     return Math.ceil(getFormationHours() / 3);
   };
 
-  const calculateEndDate = (start: Date, weeklyHours: number) => {
+  const calculateEndDate = (start: Date) => {
     const totalHours = getFormationHours();
+    const weeklyHours = action?.weeklyDedication || 8; // Use action's weekly dedication or default to 8
     const weeksNeeded = Math.ceil(totalHours / weeklyHours);
     return addWeeks(start, weeksNeeded);
   };
@@ -262,7 +260,6 @@ export default function EditAction() {
     return getNewCreditsConsumption() - getCurrentCreditsConsumption();
   };
 
-  const watchedWeeklyDedication = form.watch("weeklyDedication");
   const watchedStartDate = form.watch("startDate");
 
   // Student management functions
@@ -380,7 +377,7 @@ export default function EditAction() {
                   <div className="flex items-center gap-6 text-sm text-muted-foreground mt-2">
                     <span className="flex items-center gap-1">
                       <Clock className="h-4 w-4" />
-                      {action?.duration || "0 h. 0 min."}
+                      {action?.duration || "0 h. 0 min."} · {action?.weeklyDedication || 8}h/sem
                     </span>
                     <span className="flex items-center gap-1">
                       <CreditCard className="h-4 w-4" />
@@ -597,7 +594,7 @@ export default function EditAction() {
               <CardContent>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 gap-6">
                     {/* Start date */}
                     <FormField
                       control={form.control}
@@ -640,45 +637,14 @@ export default function EditAction() {
                                   availableThursday: (date) => isThursday(date) && isValidStartDate(date)
                                 }}
                                 modifiersClassNames={{
-                                  availableThursday: "bg-primary/10 text-primary font-medium hover:bg-primary/20 border border-primary/20"
+                                  availableThursday: "bg-green-100 text-green-800 font-semibold hover:bg-green-200 border border-green-300"
                                 }}
                               />
                             </PopoverContent>
                           </Popover>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    {/* Weekly dedication */}
-                    <FormField
-                      control={form.control}
-                      name="weeklyDedication"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Dedicación semanal (horas)</FormLabel>
-                          <FormControl>
-                            <Select
-                              value={field.value.toString()}
-                              onValueChange={(value) => field.onChange(parseInt(value))}
-                            >
-                              <SelectTrigger className="w-full">
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="2">2 horas/semana</SelectItem>
-                                <SelectItem value="3">3 horas/semana</SelectItem>
-                                <SelectItem value="4">4 horas/semana</SelectItem>
-                                <SelectItem value="5">5 horas/semana</SelectItem>
-                                <SelectItem value="6">6 horas/semana</SelectItem>
-                                <SelectItem value="8">8 horas/semana</SelectItem>
-                                <SelectItem value="10">10 horas/semana</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                          {watchedStartDate && watchedWeeklyDedication && (
+                          {watchedStartDate && (
                             <p className="text-sm text-muted-foreground">
-                              Finalizará el <strong>{format(calculateEndDate(watchedStartDate, watchedWeeklyDedication), "PPP", { locale: es })}</strong>
+                              Finalizará el <strong>{format(calculateEndDate(watchedStartDate), "PPP", { locale: es })}</strong>
                             </p>
                           )}
                           <FormMessage />
