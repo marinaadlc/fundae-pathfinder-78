@@ -209,7 +209,7 @@ const CreateAction = () => {
   const [currentStep, setCurrentStep] = useState(initialStep);
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
-  
+
   // Handle custom formation from sessionStorage
   const getInitialFormation = () => {
     if (isCustomFormation) {
@@ -220,7 +220,6 @@ const CreateAction = () => {
     }
     return preselectedFormationId ? mockFormations.find(f => f.id === parseInt(preselectedFormationId)) || null : null;
   };
-  
   const [selectedFormation, setSelectedFormation] = useState<Formation | null>(getInitialFormation());
   const [hoveredFormation, setHoveredFormation] = useState<Formation | null>(null);
   const [selectedFormationDetail, setSelectedFormationDetail] = useState<Formation | null>(null);
@@ -482,28 +481,24 @@ const CreateAction = () => {
              
 
               <div className="space-y-4">
-                {filteredFormations.map(formation => <Card key={formation.id} className={`relative transition-all duration-300 cursor-pointer hover:shadow-lg overflow-hidden group ${isFormationSelected(formation) ? "bg-primary/10 border-primary shadow-lg" : ""} ${selectedFormationDetail?.id === formation.id ? "bg-selected-state shadow-lg" : ""}`} onMouseEnter={() => setHoveredFormation(formation)} onMouseLeave={() => setHoveredFormation(null)} onClick={() => handleSelectFormation(formation)}>
+                {filteredFormations.map(formation => <Card key={formation.id} className={`relative transition-all duration-300 cursor-pointer hover:shadow-lg overflow-hidden group ${isFormationSelected(formation) ? "bg-primary/10 border-primary shadow-lg" : ""} ${selectedFormationDetail?.id === formation.id ? "bg-accent/50 shadow-lg" : ""}`} onMouseEnter={() => setHoveredFormation(formation)} onMouseLeave={() => setHoveredFormation(null)} onClick={() => handleSelectFormation(formation)}>
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                            <div className="flex items-center gap-3 mb-2">
                              <h3 className="font-semibold text-foreground">{formation.name}</h3>
-                             {isFormationSelected(formation) && (
-                               <Badge className="bg-primary text-primary-foreground">
+                             {isFormationSelected(formation) && <Badge className="bg-primary text-primary-foreground">
                                  Seleccionada
-                               </Badge>
-                             )}
+                               </Badge>}
                              {formation.isPopular && <div className="flex items-center gap-1">
                                  <Star className="h-4 w-4 text-orange-500 fill-current" />
                                  <span className="text-sm text-orange-600 font-medium">Popular</span>
                                </div>}
                           </div>
-                           {isFormationSelected(formation) && parseFloat(formation.duration.split(' ')[0]) < 18 && (
-                             <div className="flex items-center gap-2 text-sm font-medium text-primary-dark bg-primary/5 p-2 rounded-md mb-2">
+                           {isFormationSelected(formation) && parseFloat(formation.duration.split(' ')[0]) < 18 && <div className="flex items-center gap-2 text-sm font-medium text-primary-dark bg-primary/5 p-2 rounded-md mb-2">
                                <Info className="h-4 w-4 text-primary-dark" />
                                Necesitarás que al menos {getMinimumStudentsRequired()} personas realicen esta acción formativa para alcanzar el mínimo de horas requerido.
-                             </div>
-                           )}
+                             </div>}
                         </div>
                         
                         <div className="flex items-center gap-4">
@@ -525,27 +520,27 @@ const CreateAction = () => {
                     
                     {/* Hover Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-900/30 to-gray-900/90 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-end" style={{
-    background: 'linear-gradient(to right, transparent, rgba(214, 220, 229, 0.3), rgba(214, 220, 229, 0.9))',
-  }}>
+                background: 'linear-gradient(to right, transparent, rgba(214, 220, 229, 0.3), rgba(214, 220, 229, 0.9))'
+              }}>
                       <div className="flex items-center gap-3 p-6">
-                        {isFormationSelected(formation) ? <Button size="sm" onClick={(e) => {
-                            e.stopPropagation();
-                            handleSelectFormation(formation);
-                          }} className="bg-white text-slate-900 hover:bg-gray-100">
+                        {isFormationSelected(formation) ? <Button size="sm" onClick={e => {
+                    e.stopPropagation();
+                    handleSelectFormation(formation);
+                  }} className="bg-white text-slate-900 hover:bg-gray-100">
                             Seleccionada
-                          </Button> : <Button size="sm" onClick={(e) => {
-                            e.stopPropagation();
-                            handleSelectFormation(formation);
-                          }} className="bg-white text-slate-900 hover:bg-gray-100">
+                          </Button> : <Button size="sm" onClick={e => {
+                    e.stopPropagation();
+                    handleSelectFormation(formation);
+                  }} className="bg-white text-slate-900 hover:bg-gray-100">
                             Seleccionar
                           </Button>}
                         
-                        <Button variant="outline" size="sm" onClick={(e) => {
-                            e.stopPropagation();
-                            if (selectedFormationDetail?.id !== formation.id) {
-                              setSelectedFormationDetail(formation);
-                            }
-                          }} className="border-white text-black bg-white hover:bg-gray-100 hover:text-black">
+                        <Button variant="outline" size="sm" onClick={e => {
+                    e.stopPropagation();
+                    if (selectedFormationDetail?.id !== formation.id) {
+                      setSelectedFormationDetail(formation);
+                    }
+                  }} className="border-white text-black bg-white hover:bg-gray-100 hover:text-black">
                           Ver los cursos →
                         </Button>
                       </div>
@@ -567,10 +562,10 @@ const CreateAction = () => {
                       </div>
                       
                       <div className="flex items-center gap-4">
-                        <Button variant="outline" size="sm" className="border-teal-500 text-teal-700 hover:bg-teal-100" onClick={(e) => {
-                          e.stopPropagation();
-                          navigate('/custom-formation');
-                        }}>
+                        <Button variant="outline" size="sm" className="border-teal-500 text-teal-700 hover:bg-teal-100" onClick={e => {
+                      e.stopPropagation();
+                      navigate('/custom-formation');
+                    }}>
                           Crear formación
                         </Button>
                       </div>
@@ -586,8 +581,8 @@ const CreateAction = () => {
 
             {/* Side panel - Formations details */}
             {selectedFormationDetail && selectedFormationDetail.subFormations && <div className="w-96">
-                <Card className="sticky top-4 bg-selected-state">
-                  <CardContent className="p-6">
+                <Card className="sticky top-4">
+                  <CardContent className="p-6 bg-gray-200">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="font-semibold">Cursos que incluye</h3>
                       <Button variant="ghost" size="sm" onClick={() => setSelectedFormationDetail(null)}>
@@ -596,7 +591,7 @@ const CreateAction = () => {
                     </div>
 
                     <div className="space-y-4 max-h-96 overflow-y-auto">                  
-                      {selectedFormationDetail.subFormations?.map((subFormation, index) => <div key={index} className="border rounded-lg p-4">
+                      {selectedFormationDetail.subFormations?.map((subFormation, index) => <div key={index} className="border rounded-lg p-4 bg-white">
                           <h4 className="font-medium mb-2">{subFormation.name}</h4>
                           <p className="text-sm text-muted-foreground mb-3">{subFormation.description}</p>
                           <div className="flex items-center justify-between text-sm text-muted-foreground">
@@ -844,7 +839,9 @@ const CreateAction = () => {
                     <div className="flex items-center gap-2">
                       <CalendarIcon className="h-4 w-4 text-muted-foreground" />
                       <span className="text-sm">
-                        {endDate ? format(endDate, "PPP", { locale: es }) : "Selecciona una fecha de inicio"}
+                        {endDate ? format(endDate, "PPP", {
+                      locale: es
+                    }) : "Selecciona una fecha de inicio"}
                       </span>
                     </div>
                   </div>
