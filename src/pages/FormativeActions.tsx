@@ -10,39 +10,39 @@ interface FormativeAction {
   id: number;
   name: string;
   students: number;
-  creationDate: string;
   startDate: string;
+  endDate: string;
   status: "solicited" | "scheduled" | "in-progress" | "completed";
 }
-type SortField = 'name' | 'students' | 'creationDate' | 'startDate' | 'status';
+type SortField = 'name' | 'students' | 'startDate' | 'endDate' | 'status';
 type SortDirection = 'asc' | 'desc';
 const mockActions: FormativeAction[] = [{
   id: 1,
   name: "SCRUM y metodologías Agile",
   students: 32,
-  creationDate: "20/05/2022",
   startDate: "20/05/2022",
+  endDate: "30/06/2022",
   status: "solicited"
 }, {
   id: 2,
   name: "Python para Data Science",
   students: 28,
-  creationDate: "15/04/2022",
   startDate: "25/04/2022",
+  endDate: "15/06/2022",
   status: "scheduled"
 }, {
   id: 3,
   name: "React y desarrollo web",
   students: 24,
-  creationDate: "10/03/2022",
   startDate: "20/03/2022",
+  endDate: "10/05/2022",
   status: "in-progress"
 }, {
   id: 4,
   name: "Gestión de proyectos",
   students: 18,
-  creationDate: "01/02/2022",
   startDate: "15/02/2022",
+  endDate: "30/03/2022",
   status: "completed"
 }];
 const FormativeActions = () => {
@@ -100,7 +100,7 @@ const FormativeActions = () => {
   }).sort((a, b) => {
     let aValue: any = a[sortField];
     let bValue: any = b[sortField];
-    if (sortField === 'creationDate' || sortField === 'startDate') {
+    if (sortField === 'startDate' || sortField === 'endDate') {
       aValue = new Date((aValue as string).split('/').reverse().join('-')).getTime();
       bValue = new Date((bValue as string).split('/').reverse().join('-')).getTime();
     }
@@ -161,11 +161,11 @@ const FormativeActions = () => {
                   <th className="text-left p-4 font-medium text-muted-foreground cursor-pointer hover:text-foreground transition-colors" onClick={() => handleSort('students')}>
                     Alumnos{getSortIcon('students')}
                   </th>
-                  <th className="text-left p-4 font-medium text-muted-foreground cursor-pointer hover:text-foreground transition-colors" onClick={() => handleSort('creationDate')}>
-                    Fecha de creación{getSortIcon('creationDate')}
-                  </th>
                   <th className="text-left p-4 font-medium text-muted-foreground cursor-pointer hover:text-foreground transition-colors" onClick={() => handleSort('startDate')}>
                     Fecha de inicio{getSortIcon('startDate')}
+                  </th>
+                  <th className="text-left p-4 font-medium text-muted-foreground cursor-pointer hover:text-foreground transition-colors" onClick={() => handleSort('endDate')}>
+                    Fecha de fin{getSortIcon('endDate')}
                   </th>
                   <th className="text-left p-4 font-medium text-muted-foreground cursor-pointer hover:text-foreground transition-colors" onClick={() => handleSort('status')}>
                     Estado{getSortIcon('status')}
@@ -189,13 +189,13 @@ const FormativeActions = () => {
                     <td className="p-4">
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4 text-muted-foreground" />
-                        <span>{action.creationDate}</span>
+                        <span>{action.startDate}</span>
                       </div>
                     </td>
                     <td className="p-4">
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4 text-muted-foreground" />
-                        <span>{action.startDate}</span>
+                        <span>{action.endDate}</span>
                       </div>
                     </td>
                     <td className="p-4">
