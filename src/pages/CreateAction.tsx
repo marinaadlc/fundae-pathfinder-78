@@ -756,9 +756,7 @@ const CreateAction = () => {
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                              <User className="h-5 w-5 text-primary" />
-                            </div>
+                            
                             <div>
                               <p className="font-medium text-foreground">{student.name} {student.firstName} {student.lastName}</p>
                               {student.email && <div className="flex items-center gap-1 text-sm text-muted-foreground">
