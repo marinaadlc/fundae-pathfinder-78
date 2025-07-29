@@ -13,6 +13,7 @@ import Catalog from "./pages/Catalog";
 import FormationDetail from "./pages/FormationDetail";
 import Students from "./pages/Students";
 import Settings from "./pages/Settings";
+import CreditWallet from "./pages/CreditWallet";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
@@ -37,6 +38,7 @@ const App = () => (
                 <Route path="/create-action" element={<CreateAction />} />
                 <Route path="/custom-formation" element={<CustomFormationCreator />} />
                 <Route path="/students" element={<Students />} />
+                <Route path="/credit-wallet" element={<CreditWallet />} />
                 <Route path="/settings" element={<Settings />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />

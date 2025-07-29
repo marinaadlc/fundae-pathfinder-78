@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Coins, BadgeCent, User, Settings, LogOut } from "lucide-react";
+import { Coins, BadgeCent, User, Settings, LogOut, Wallet } from "lucide-react";
 
 interface LayoutProps {
   children: ReactNode;
@@ -75,6 +75,12 @@ const Layout = ({ children }: LayoutProps) => {
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link to="/credit-wallet" className="flex items-center">
+                      <Wallet className="mr-2 h-4 w-4" />
+                      <span>Bolsa de créditos</span>
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link to="/settings" className="flex items-center">
                       <Settings className="mr-2 h-4 w-4" />
