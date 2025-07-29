@@ -202,9 +202,7 @@ const FormativeActions = () => {
                       {getStatusBadge(action.status)}
                     </td>
                     <td className="p-4">
-                      <Button variant="ghost" size="sm">
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
+                      
                     </td>
                   </tr>)}
               </tbody>
