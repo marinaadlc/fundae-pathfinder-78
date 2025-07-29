@@ -546,7 +546,7 @@ const CreateAction = () => {
                               setSelectedFormationDetail(formation);
                             }
                           }} className="border-white text-black bg-white hover:bg-gray-100 hover:text-black">
-                          Ver los cursos
+                          Ver los cursos →
                         </Button>
                       </div>
                     </div>
