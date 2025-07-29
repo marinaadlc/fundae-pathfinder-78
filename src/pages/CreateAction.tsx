@@ -582,7 +582,7 @@ const CreateAction = () => {
             {/* Side panel - Formations details */}
             {selectedFormationDetail && selectedFormationDetail.subFormations && <div className="w-96">
                 <Card className="sticky top-4">
-                  <CardContent className="p-6 bg-gray-200">
+                  <CardContent className="p-6 bg-gray-100">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="font-semibold">Cursos que incluye</h3>
                       <Button variant="ghost" size="sm" onClick={() => setSelectedFormationDetail(null)}>
