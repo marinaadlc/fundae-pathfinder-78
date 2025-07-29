@@ -481,7 +481,7 @@ const CreateAction = () => {
              
 
               <div className="space-y-4">
-                {filteredFormations.map(formation => <Card key={formation.id} className={`relative transition-all duration-300 cursor-pointer hover:shadow-lg overflow-hidden group ${isFormationSelected(formation) ? "bg-primay/10 border-primary shadow-lg" : ""} ${selectedFormationDetail?.id === formation.id ? "bg-gray-100 shadow-lg" : ""}`} onMouseEnter={() => setHoveredFormation(formation)} onMouseLeave={() => setHoveredFormation(null)} onClick={() => handleSelectFormation(formation)}>
+                {filteredFormations.map(formation => <Card key={formation.id} className={`relative transition-all duration-300 cursor-pointer hover:shadow-lg overflow-hidden group ${isFormationSelected(formation) ? "bg-primay/50 border-primary shadow-lg" : ""} ${selectedFormationDetail?.id === formation.id ? "bg-gray-100 shadow-lg" : ""}`} onMouseEnter={() => setHoveredFormation(formation)} onMouseLeave={() => setHoveredFormation(null)} onClick={() => handleSelectFormation(formation)}>
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
