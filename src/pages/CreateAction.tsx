@@ -798,8 +798,8 @@ const CreateAction = () => {
                     {selectedFormation?.category}
                   </Badge>
                   <div className="flex items-center gap-2 text-sm">
-                    <Clock className="h-4 w-4 bg-zinc-50" />
-                    <span className="text-zinc-500">{selectedFormation?.duration}</span>
+                    <Clock className="h-4 w-4 bg-zinc-300" />
+                    <span className="text-zinc-500blue-950">{selectedFormation?.duration}</span>
                   </div>
                 </div>
               </div>
