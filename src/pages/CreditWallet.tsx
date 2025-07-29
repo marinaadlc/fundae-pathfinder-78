@@ -118,10 +118,10 @@ const CreditWallet = () => {
                 <TableRow>
                   <TableHead>Fecha</TableHead>
                   <TableHead>Formación</TableHead>
-                  <TableHead className="text-right">Importe créditos €</TableHead>
+                  <TableHead className="text-right">Importe €</TableHead>
                   <TableHead className="text-right">Créditos</TableHead>
                   <TableHead className="text-right">Coste/alumno</TableHead>
-                  <TableHead className="text-right">Créditos/alumno</TableHead>
+                  <TableHead className="text-right">Importe €/alumno</TableHead>
                   <TableHead className="text-right">Nº alumnos</TableHead>
                 </TableRow>
               </TableHeader>
