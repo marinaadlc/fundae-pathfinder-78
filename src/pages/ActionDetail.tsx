@@ -489,7 +489,10 @@ const ActionDetail = () => {
                 <TableRow key={student.id}>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <span className="font-medium">{student.name}</span>
+                      <div>
+                        <p className="font-semibold text-foreground">{student.name}</p>
+                        <p className="text-sm text-muted-foreground">{`${student.name.split(' ')[0].toLowerCase()}.${student.name.split(' ').slice(1).join('').toLowerCase()}@empresa.com`}</p>
+                      </div>
                       {student.progress >= 75 && (
                         <div className="flex items-center gap-1">
                           <TooltipProvider>

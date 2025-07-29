@@ -362,7 +362,7 @@ export default function EditAction() {
             </Link>
             <div>
               <h1 className="text-3xl font-bold text-foreground">Editar acción formativa</h1>
-              <p className="text-muted-foreground">Modifica los alumnos, fechas y dedicación de la acción</p>
+              <p className="text-muted-foreground">Modifica los alumnos y fechas de la acción</p>
             </div>
           </div>
         </div>
