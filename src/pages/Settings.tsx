@@ -127,31 +127,7 @@ const Settings = () => {
 
         <TabsContent value="empresa" className="space-y-8">{/* ... keep existing code (all company data cards) */}
 
-      {/* Bolsa de Créditos */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <CreditCard className="h-5 w-5 text-primary" />
-            Bolsa de Créditos
-          </CardTitle>
-          <CardDescription>
-            Créditos disponibles para formaciones
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Badge variant="secondary" className="text-lg px-4 py-2">
-                340 créditos disponibles
-              </Badge>
-            </div>
-            <Button onClick={handleSolicitarCreditos} className="flex items-center gap-2">
-              <Plus className="h-4 w-4" />
-              Solicitar más horas
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+     
 
       {/* Datos de Identificación */}
       <Card>
