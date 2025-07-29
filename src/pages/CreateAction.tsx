@@ -619,7 +619,7 @@ const CreateAction = () => {
       {currentStep === 2 && <>
           <div className="space-y-6">
             {/* Header with selected formation info and credits */}
-            {selectedFormation && <Card className="bg-accent/50">
+            {selectedFormation && <Card className="bg-primary/50">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
