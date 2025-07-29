@@ -229,7 +229,7 @@ const FormationDetail = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {mockSubFormations.map((subFormation, index) => <div key={subFormation.id} className="border rounded-lg p-4 hover:bg-accent/50 transition-colors">
+          {mockSubFormations.map((subFormation, index) => <div key={subFormation.id} className="border rounded-lg p-4">
               <div className="flex items-start gap-4">
                 <div className="text-2xl font-bold text-muted-foreground/50 min-w-[2rem]">
                   {index + 1}
