@@ -490,6 +490,10 @@ const ActionDetail = () => {
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <div>
+                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                            <Mail className="h-3 w-3" />
+                            <span>{student.email}</span>
+                          </div>
                         <p className="font-semibold text-foreground">{student.name}</p>
                         <p className="text-sm text-muted-foreground">{`${student.name.split(' ')[0].toLowerCase()}.${student.name.split(' ').slice(1).join('').toLowerCase()}@empresa.com`}</p>
                       </div>
