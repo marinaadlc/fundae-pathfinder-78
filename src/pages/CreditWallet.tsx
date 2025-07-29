@@ -79,6 +79,11 @@ const CreditWallet = () => {
     }
   ];
 
+    const { toast } = useToast();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+
   const totalCreditAmount = transactions.reduce((sum, t) => 
     sum + (t.type === 'purchase' ? t.creditAmount : -t.creditAmount), 0
   );
@@ -94,6 +99,15 @@ const CreditWallet = () => {
     }).format(amount);
   };
 
+  const handleSolicitarCreditos = () => {
+    // Simular envío de email al comercial
+    setIsModalOpen(true);
+    toast({
+      title: "Solicitud enviada",
+      description: "Hemos enviado tu solicitud al comercial responsable. Te contactarán pronto.",
+    });
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('es-ES');
   };
@@ -107,29 +121,62 @@ const CreditWallet = () => {
         </p>
       </div>
 
+      {/* Bolsa de Créditos */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center justify-between">
-            <span>Balance actual</span>
-            <div className="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full">
-              <Badge className="text-lg font-bold text-primary">
-                {totalCredits} créditos disponibles
+          <CardTitle className="flex items-center gap-2">
+            <CreditCard className="h-5 w-5 text-primary" />
+            Bolsa de Créditos
+          </CardTitle>
+          <CardDescription>
+            Créditos disponibles para formaciones
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Badge variant="secondary" className="text-lg px-4 py-2">
+                340 créditos disponibles
               </Badge>
             </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-4">
-            <div className="text-3xl font-bold text-primary mb-2">
-              {formatCurrency(totalCreditAmount)}
-            </div>
-            <p className="text-muted-foreground">
-              Valor total de la bolsa de créditos
-            </p>
+            <Button onClick={handleSolicitarCreditos} className="flex items-center gap-2">
+              <Plus className="h-4 w-4" />
+              Solicitar más horas
+            </Button>
           </div>
         </CardContent>
       </Card>
 
+       {/* Modal de Confirmación */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Mail className="h-5 w-5 text-primary" />
+              Solicitud Enviada
+            </DialogTitle>
+            <DialogDescription className="space-y-3">
+              <p>
+                Tu solicitud de créditos adicionales ha sido enviada correctamente al comercial responsable.
+              </p>
+              <div className="bg-muted p-4 rounded-lg">
+                <p className="text-sm font-medium text-foreground">¿Qué ocurre ahora?</p>
+                <ul className="text-sm text-muted-foreground mt-2 space-y-1">
+                  <li>• El comercial revisará tu solicitud</li>
+                  <li>• Te contactará en un plazo máximo de 24 horas</li>
+                  <li>• Recibirás una propuesta personalizada</li>
+                </ul>
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end">
+            <Button onClick={() => setIsModalOpen(false)}>
+              Entendido
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+      
       <Card>
         <CardHeader>
           <CardTitle>Historial de transacciones</CardTitle>
