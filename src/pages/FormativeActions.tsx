@@ -56,7 +56,15 @@ const FormativeActions = () => {
   useEffect(() => {
     const savedActions = localStorage.getItem('formativeActions');
     if (savedActions) {
-      setActions(JSON.parse(savedActions));
+      const parsedActions = JSON.parse(savedActions);
+      // Check if the saved data has the new endDate field
+      if (parsedActions.length > 0 && !parsedActions[0].endDate) {
+        // If old data format, use mock data and update localStorage
+        setActions(mockActions);
+        localStorage.setItem('formativeActions', JSON.stringify(mockActions));
+      } else {
+        setActions(parsedActions);
+      }
     }
   }, []);
 
