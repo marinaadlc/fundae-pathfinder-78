@@ -482,7 +482,7 @@ const CreateAction = () => {
              
 
               <div className="space-y-4">
-                {filteredFormations.map(formation => <Card key={formation.id} className={`relative transition-all duration-300 cursor-pointer hover:shadow-lg overflow-hidden group ${isFormationSelected(formation) ? "bg-primary/10 border-primary shadow-lg" : ""} ${selectedFormationDetail?.id === formation.id ? "bg-accent/50 shadow-lg" : ""}`} onMouseEnter={() => setHoveredFormation(formation)} onMouseLeave={() => setHoveredFormation(null)} onClick={() => handleSelectFormation(formation)}>
+                {filteredFormations.map(formation => <Card key={formation.id} className={`relative transition-all duration-300 cursor-pointer hover:shadow-lg overflow-hidden group ${isFormationSelected(formation) ? "bg-primary/10 border-primary shadow-lg" : ""} ${selectedFormationDetail?.id === formation.id ? "bg-selected-state shadow-lg" : ""}`} onMouseEnter={() => setHoveredFormation(formation)} onMouseLeave={() => setHoveredFormation(null)} onClick={() => handleSelectFormation(formation)}>
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
@@ -586,7 +586,7 @@ const CreateAction = () => {
 
             {/* Side panel - Formations details */}
             {selectedFormationDetail && selectedFormationDetail.subFormations && <div className="w-96">
-                <Card className="sticky top-4">
+                <Card className="sticky top-4 bg-selected-state">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="font-semibold">Cursos que incluye</h3>

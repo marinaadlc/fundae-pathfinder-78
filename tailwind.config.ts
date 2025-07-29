@@ -30,6 +30,7 @@ export default {
 					light: 'hsl(var(--primary-light))',
 					dark: 'hsl(var(--primary-dark))'
 				},
+				'selected-state': 'hsl(var(--selected-state))',
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
