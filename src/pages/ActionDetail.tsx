@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { ArrowLeft, Calendar, Clock, Users, CheckCircle, ArrowUpDown, ArrowUp, ArrowDown, Award, Edit3 } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Users, CheckCircle, ArrowUpDown, ArrowUp, ArrowDown, Award, Edit3, Mail } from "lucide-react";
 import { toast } from "sonner";
 
 interface Student {
   id: number;
   name: string;
+  email: string;
   progress: number;
   dedicationTime: number; // hours
   grade: number; // 0-10
@@ -44,6 +45,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 1,
         name: "Ana García López",
+        email: "ana.garcialopez@empresa.com",
         progress: 0,
         dedicationTime: 0,
         grade: 0
@@ -51,6 +53,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 2,
         name: "Carlos Ruiz Martín",
+        email: "carlos.ruizmartin@empresa.com",
         progress: 0,
         dedicationTime: 0,
         grade: 0
@@ -58,6 +61,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 3,
         name: "María Fernández Silva",
+        email: "maria.fernandezsilva@empresa.com",
         progress: 0,
         dedicationTime: 0,
         grade: 0
@@ -76,6 +80,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 4,
         name: "Elena Fernández Castro",
+        email: "elena.fernandezcastro@empresa.com",
         progress: 0,
         dedicationTime: 0,
         grade: 0
@@ -83,6 +88,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 5,
         name: "David López Moreno",
+        email: "david.lopezmoreno@empresa.com",
         progress: 0,
         dedicationTime: 0,
         grade: 0
@@ -90,6 +96,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 6,
         name: "Laura Sánchez Torres",
+        email: "laura.sancheztorres@empresa.com",
         progress: 0,
         dedicationTime: 0,
         grade: 0
@@ -97,6 +104,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 7,
         name: "Miguel García Ruiz",
+        email: "miguel.garciaruiz@empresa.com",
         progress: 0,
         dedicationTime: 0,
         grade: 0
@@ -115,6 +123,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 8,
         name: "Ana García López",
+        email: "ana.garcialopez@empresa.com",
         progress: 85,
         dedicationTime: 45,
         grade: 8.5
@@ -122,6 +131,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 9,
         name: "Carlos Ruiz Martín",
+        email: "carlos.ruizmartin@empresa.com",
         progress: 65,
         dedicationTime: 32,
         grade: 7.2
@@ -129,6 +139,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 10,
         name: "María Fernández Silva",
+        email: "maria.fernandezsilva@empresa.com",
         progress: 92,
         dedicationTime: 52,
         grade: 9.1
@@ -136,6 +147,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 11,
         name: "David López González",
+        email: "david.lopezgonzalez@empresa.com",
         progress: 45,
         dedicationTime: 28,
         grade: 6.8
@@ -154,6 +166,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 12,
         name: "Laura Sánchez Torres",
+        email: "laura.sancheztorres@empresa.com",
         progress: 100,
         dedicationTime: 78,
         grade: 9.3
@@ -161,6 +174,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 13,
         name: "Miguel García Ruiz",
+        email: "miguel.garciaruiz@empresa.com",
         progress: 95,
         dedicationTime: 72,
         grade: 8.8
@@ -168,6 +182,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 14,
         name: "Carmen López Silva",
+        email: "carmen.lopezsilva@empresa.com",
         progress: 88,
         dedicationTime: 65,
         grade: 8.1
@@ -175,6 +190,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 15,
         name: "Antonio Martín Torres",
+        email: "antonio.martintorres@empresa.com",
         progress: 92,
         dedicationTime: 70,
         grade: 8.6
@@ -182,6 +198,7 @@ const mockActionDetails: { [key: number]: ActionDetail } = {
       {
         id: 16,
         name: "Isabel García López",
+        email: "isabel.garcialopez@empresa.com",
         progress: 85,
         dedicationTime: 62,
         grade: 7.9
@@ -489,14 +506,10 @@ const ActionDetail = () => {
                 <TableRow key={student.id}>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <div>
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                            <Mail className="h-3 w-3" />
-                            <span>{student.email}</span>
-                          </div>
-                        <p className="font-semibold text-foreground">{student.name}</p>
-                        <p className="text-sm text-muted-foreground">{`${student.name.split(' ')[0].toLowerCase()}.${student.name.split(' ').slice(1).join('').toLowerCase()}@empresa.com`}</p>
-                      </div>
+                     <div>
+                         <p className="font-semibold text-foreground">{student.name}</p>
+                         <p className="text-sm text-muted-foreground">{student.email}</p>
+                       </div>
                       {student.progress >= 75 && (
                         <div className="flex items-center gap-1">
                           <TooltipProvider>
