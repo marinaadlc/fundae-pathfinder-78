@@ -369,7 +369,7 @@ export default function EditAction() {
 
         {/* Action info - Sticky */}
         <div className="sticky top-0 z-20 bg-background pt-4 border-b pb-4">
-          <Card className="bg-accent/50">
+          <Card className="bg-primary/50">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
