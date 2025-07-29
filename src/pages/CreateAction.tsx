@@ -637,7 +637,7 @@ const CreateAction = () => {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-semibold text-primary">
+                      <div className="text-lg font-semibold text-primary/100">
                         {getTotalCreditsConsumption()} créditos totales
                       </div>
                       <div className="text-sm text-muted-foreground">
