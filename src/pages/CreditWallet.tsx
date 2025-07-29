@@ -109,6 +109,29 @@ const CreditWallet = () => {
 
       <Card>
         <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <span>Balance actual</span>
+            <div className="flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full">
+              <Badge className="text-lg font-bold text-primary">
+                {totalCredits} créditos disponibles
+              </Badge>
+            </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-center py-4">
+            <div className="text-3xl font-bold text-primary mb-2">
+              {formatCurrency(totalCreditAmount)}
+            </div>
+            <p className="text-muted-foreground">
+              Valor total de la bolsa de créditos
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
           <CardTitle>Historial de transacciones</CardTitle>
         </CardHeader>
         <CardContent>
