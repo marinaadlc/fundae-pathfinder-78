@@ -486,19 +486,24 @@ const CreateAction = () => {
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <h3 className="font-semibold text-foreground">{formation.name}</h3>
-                            {formation.isPopular && <div className="flex items-center gap-1">
-                                <Star className="h-4 w-4 text-orange-500 fill-current" />
-                                <span className="text-sm text-orange-600 font-medium">Popular</span>
-                              </div>}
+                           <div className="flex items-center gap-3 mb-2">
+                             <h3 className="font-semibold text-foreground">{formation.name}</h3>
+                             {isFormationSelected(formation) && (
+                               <Badge className="bg-primary text-primary-foreground">
+                                 Seleccionada
+                               </Badge>
+                             )}
+                             {formation.isPopular && <div className="flex items-center gap-1">
+                                 <Star className="h-4 w-4 text-orange-500 fill-current" />
+                                 <span className="text-sm text-orange-600 font-medium">Popular</span>
+                               </div>}
                           </div>
-                          {isFormationSelected(formation) && parseFloat(formation.duration.split(' ')[0]) < 18 && (
-                            <div className="flex items-center gap-2 text-sm font-medium text-primary bg-primary/5 p-2 rounded-md mb-2">
-                              <Info className="h-4 w-4" />
-                              Necesitarás que al menos {getMinimumStudentsRequired()} personas realicen esta acción formativa para alcanzar el mínimo de horas requerido.
-                            </div>
-                          )}
+                           {isFormationSelected(formation) && parseFloat(formation.duration.split(' ')[0]) < 18 && (
+                             <div className="flex items-center gap-2 text-sm font-medium text-primary-dark bg-primary/5 p-2 rounded-md mb-2">
+                               <Info className="h-4 w-4 text-primary-dark" />
+                               Necesitarás que al menos {getMinimumStudentsRequired()} personas realicen esta acción formativa para alcanzar el mínimo de horas requerido.
+                             </div>
+                           )}
                         </div>
                         
                         <div className="flex items-center gap-4">
