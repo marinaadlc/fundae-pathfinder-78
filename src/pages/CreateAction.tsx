@@ -791,7 +791,7 @@ const CreateAction = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Resumen de la acción formativa */}
-              <div className="p-6 bg-accent/50 from-primary to-primary/80 rounded-lg text-primary-foreground">
+              <div className="p-6 bg-primary/10 from-primary to-primary/80 rounded-lg text-primary-foreground">
                 <h1 className="text-xl font-bold mb-4 text-zinc-900">{selectedFormation?.name}</h1>
                 <div className="flex items-center gap-6">
                   <Badge variant="secondary" className="text-primary-foreground border-primary-foreground/30 bg-zinc-300">
