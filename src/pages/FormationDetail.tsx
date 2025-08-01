@@ -6,6 +6,7 @@ import { ArrowLeft, Clock, CreditCard, Users, BookOpen, Play, Star } from "lucid
 import avatar1 from "@/assets/avatar1.png";
 import avatar2 from "@/assets/avatar2.png";
 import avatar3 from "@/assets/avatar3.png";
+import courseLogo from "@/assets/course-logo.png";
 interface Course {
   id: number;
   title: string;
@@ -149,8 +150,12 @@ const FormationDetail = () => {
         <CardContent className="p-0">
           <div className="flex flex-col md:flex-row relative">
             {/* Image Section */}
-            <div className="w-full md:w-64 h-48 md:h-auto bg-[#010118] flex items-center justify-center relative overflow-hidden">
-              <BookOpen className="h-16 w-16 text-primary/60" />
+            <div className="w-full md:w-64 h-48 md:h-auto bg-card flex items-center justify-center relative overflow-hidden p-8">
+              <img 
+                src={courseLogo} 
+                alt={`${formation.title} logo`} 
+                className="w-24 h-24 object-contain rounded-lg" 
+              />
               {formation.isPopular && <div className="absolute top-4 right-4 flex items-center gap-1 bg-orange-500 text-white px-3 py-2 rounded-full">
                   <Star className="h-4 w-4 fill-current" />
                   <span>Popular</span>
