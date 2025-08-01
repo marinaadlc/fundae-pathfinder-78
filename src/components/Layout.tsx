@@ -4,29 +4,33 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Coins, BadgeCent, User, Settings, LogOut, Wallet } from "lucide-react";
-
 interface LayoutProps {
   children: ReactNode;
 }
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({
+  children
+}: LayoutProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const handleLogout = () => {
     // Aquí iría la lógica de logout
     navigate('/login');
   };
-
-  const navigation = [
-    { name: "Catálogo de Formaciones", href: "/catalog", current: location.pathname === "/catalog" },
-    { name: "Acciones formativas", href: "/", current: location.pathname === "/" },
-    { name: "Alumnos", href: "/students", current: location.pathname === "/students" },
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
-      <header className="bg-card border-b">
+  const navigation = [{
+    name: "Catálogo de Formaciones",
+    href: "/catalog",
+    current: location.pathname === "/catalog"
+  }, {
+    name: "Acciones formativas",
+    href: "/",
+    current: location.pathname === "/"
+  }, {
+    name: "Alumnos",
+    href: "/students",
+    current: location.pathname === "/students"
+  }];
+  return <div className="min-h-screen bg-background">
+      <header className="border-b bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-8">
@@ -37,19 +41,9 @@ const Layout = ({ children }: LayoutProps) => {
                 <span className="text-2xl font-bold text-foreground">BonificaPro</span>
               </Link>
               <nav className="flex space-x-3">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`px-4 py-2 text-sm rounded-full transition-colors no-underline ${
-                      item.current
-                        ? "text-primary bg-primary/10 font-medium"
-                        : "text-muted-foreground hover:text-primary hover:bg-primary/5 font-normal"
-                    }`}
-                  >
+                {navigation.map(item => <Link key={item.name} to={item.href} className={`px-4 py-2 text-sm rounded-full transition-colors no-underline ${item.current ? "text-primary bg-primary/10 font-medium" : "text-muted-foreground hover:text-primary hover:bg-primary/5 font-normal"}`}>
                     {item.name}
-                  </Link>
-                ))}
+                  </Link>)}
               </nav>
             </div>
             
@@ -101,8 +95,6 @@ const Layout = ({ children }: LayoutProps) => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {children}
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default Layout;
