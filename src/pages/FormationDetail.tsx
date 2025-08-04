@@ -146,19 +146,19 @@ const FormationDetail = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="bg-[#2A4157] rounded-lg p-8 text-white">
-        <div className="flex items-start gap-6">
-          {/* Course Logo */}
-          <div className="flex-shrink-0">
+      <div className="bg-[#04253D] rounded-lg overflow-hidden text-white">
+        <div className="flex">
+          {/* Course Logo - Full Height */}
+          <div className="bg-[#031C33] flex items-center justify-center p-8 w-48">
             <img 
               src={courseLogo} 
               alt={`${formation.title} logo`} 
-              className="w-24 h-24 object-contain rounded-lg bg-white/10 p-4" 
+              className="w-24 h-24 object-contain" 
             />
           </div>
           
           {/* Content */}
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 p-8 space-y-4">
             {/* Badges */}
             <div className="flex items-center gap-3">
               {formation.isPopular && (
@@ -181,77 +181,68 @@ const FormationDetail = () => {
               <p className="text-white/80 text-lg leading-relaxed">{formation.description}</p>
             </div>
             
-            {/* Action Button */}
-            <div className="pt-4">
+            {/* Stats Row with Action Button */}
+            <div className="flex items-center justify-between pt-4">
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2 text-white/80">
+                  <Clock className="h-4 w-4" />
+                  <span className="text-sm">{formation.duration}</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/80">
+                  <CreditCard className="h-4 w-4" />
+                  <span className="text-sm">{formation.credits} Créditos/Alumno</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/80">
+                  <Users className="h-4 w-4" />
+                  <span className="text-sm">{formation.students} Alumnos</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/80">
+                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  <span className="text-sm">4.7</span>
+                </div>
+              </div>
+              
               <Button 
                 onClick={handleCreateAction} 
                 className="bg-[#00E5A0] hover:bg-[#00E5A0]/90 text-black font-medium px-6 py-2 rounded-lg"
               >
-                <Play className="h-4 w-4 mr-2" />
+                <BookOpen className="h-4 w-4 mr-2" />
                 Generar Acción formativa
               </Button>
-            </div>
-            
-            {/* Stats Row */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="flex items-center gap-2 text-white/80">
-                <Clock className="h-4 w-4" />
-                <span className="text-sm">{formation.duration}</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/80">
-                <CreditCard className="h-4 w-4" />
-                <span className="text-sm">{formation.credits} Créditos/Alumno</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/80">
-                <Users className="h-4 w-4" />
-                <span className="text-sm">{formation.students} Alumnos</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/80">
-                <Star className="h-4 w-4 fill-current" />
-                <span className="text-sm">4.7</span>
-              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Course Content */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <BookOpen className="h-5 w-5" />
-            Contenidos de la formación
-            <Badge variant="outline" className="ml-auto">
+      <div className="bg-[#04253D] rounded-lg text-white">
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold">Contenidos de la formación</h2>
+            <Badge variant="outline" className="border-white/30 text-white">
               {mockSubFormations.length} Cursos
             </Badge>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {mockSubFormations.map((subFormation, index) => <div key={subFormation.id} className="border rounded-lg p-4">
-              <div className="flex items-start gap-4">
-                <div className="text-2xl font-bold text-muted-foreground/50 min-w-[2rem]">
-                  {index + 1}
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold mb-2">{subFormation.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                    {subFormation.description}
-                  </p>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      <span>{subFormation.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <CreditCard className="h-4 w-4" />
-                      <span>{subFormation.credits} créditos</span>
-                    </div>
+          </div>
+          
+          <div className="space-y-4">
+            {mockSubFormations.map((subFormation, index) => (
+              <div key={subFormation.id} className="border border-white/20 rounded-lg p-4">
+                <div className="flex items-start gap-4">
+                  <div className="text-2xl font-bold text-white/50 min-w-[2rem]">
+                    {index + 1}.
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold mb-2 text-white">{subFormation.title}</h3>
+                    <p className="text-sm text-white/70 mb-3 line-clamp-3">
+                      {subFormation.description}
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>)}
-        </CardContent>
-      </Card>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>;
 };
 export default FormationDetail;
