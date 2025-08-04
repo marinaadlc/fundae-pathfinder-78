@@ -183,6 +183,13 @@ const FormationDetail = () => {
             
             {/* Stats Row with Action Button */}
             <div className="flex items-center justify-between pt-4">
+              <Button 
+                onClick={handleCreateAction} 
+                className="bg-[#00E5A0] hover:bg-[#00E5A0]/90 text-black font-medium px-6 py-2 rounded-lg"
+              >
+                <BookOpen className="h-4 w-4 mr-2" />
+                Generar Acción formativa
+              </Button>
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2 text-white/80">
                   <Clock className="h-4 w-4" />
@@ -202,13 +209,7 @@ const FormationDetail = () => {
                 </div>
               </div>
               
-              <Button 
-                onClick={handleCreateAction} 
-                className="bg-[#00E5A0] hover:bg-[#00E5A0]/90 text-black font-medium px-6 py-2 rounded-lg"
-              >
-                <BookOpen className="h-4 w-4 mr-2" />
-                Generar Acción formativa
-              </Button>
+              
             </div>
           </div>
         </div>
