@@ -138,89 +138,82 @@ const FormationDetail = () => {
   };
   return <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="sm" onClick={() => navigate("/catalog")} className="flex items-center gap-2">
+      <div className="flex items-center gap-4 mb-6">
+        <Button variant="ghost" size="sm" onClick={() => navigate("/catalog")} className="flex items-center gap-2 text-muted-foreground hover:text-foreground">
           <ArrowLeft className="h-4 w-4" />
-          Volver al catálogo
+          Volver a catálogo
         </Button>
       </div>
 
       {/* Hero Section */}
-      <Card>
-        <CardContent className="p-0">
-          <div className="flex flex-col md:flex-row relative">
-            {/* Image Section */}
-            <div className="w-full md:w-64 h-48 md:h-auto bg-card flex items-center justify-center relative overflow-hidden p-8">
-              <img 
-                src={courseLogo} 
-                alt={`${formation.title} logo`} 
-                className="w-24 h-24 object-contain rounded-lg" 
-              />
-              {formation.isPopular && <div className="absolute top-4 right-4 flex items-center gap-1 bg-orange-500 text-white px-3 py-2 rounded-full">
-                  <Star className="h-4 w-4 fill-current" />
-                  <span>Popular</span>
-                </div>}
+      <div className="bg-[#2A4157] rounded-lg p-8 text-white">
+        <div className="flex items-start gap-6">
+          {/* Course Logo */}
+          <div className="flex-shrink-0">
+            <img 
+              src={courseLogo} 
+              alt={`${formation.title} logo`} 
+              className="w-24 h-24 object-contain rounded-lg bg-white/10 p-4" 
+            />
+          </div>
+          
+          {/* Content */}
+          <div className="flex-1 space-y-4">
+            {/* Badges */}
+            <div className="flex items-center gap-3">
+              {formation.isPopular && (
+                <Badge className="bg-orange-500 hover:bg-orange-600 text-white">
+                  <Star className="h-3 w-3 mr-1 fill-current" />
+                  Popular
+                </Badge>
+              )}
+              <Badge variant="secondary" className="bg-white/20 text-white hover:bg-white/30">
+                {formation.category}
+              </Badge>
+              <Badge variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                {formation.level}
+              </Badge>
             </div>
             
-            {/* Content Section */}
-            <div className="flex-1 p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <Badge variant="secondary">{formation.category}</Badge>
-                <Badge variant="outline" className={getLevelColor(formation.level)}>
-                  {formation.level}
-                </Badge>
-              </div>
-              
-              <h1 className="text-3xl font-bold mb-4">{formation.title}</h1>
-              <p className="text-lg text-muted-foreground mb-6">{formation.description}</p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <CreditCard className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Créditos / alumno</p>
-                    <p className="font-semibold">{formation.credits}</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Clock className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Duración</p>
-                    <p className="font-semibold">{formation.duration}</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Users className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Alumnos matriculados</p>
-                    <div className="flex items-center gap-2">
-                      <div className="flex -space-x-2">
-                        <img src={avatar1} alt="Student avatar" className="w-6 h-6 rounded-full border-2 border-white object-cover" />
-                        <img src={avatar2} alt="Student avatar" className="w-6 h-6 rounded-full border-2 border-white object-cover" />
-                        <img src={avatar3} alt="Student avatar" className="w-6 h-6 rounded-full border-2 border-white object-cover" />
-                      </div>
-                      <span className="font-semibold">{formation.students.toLocaleString()}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <Button size="lg" onClick={handleCreateAction} className="px-8 rounded-3xl">
-                <Play className="h-5 w-5 mr-2" />
-                Crear acción formativa con esta formación
+            {/* Title and Description */}
+            <div>
+              <h1 className="text-3xl font-bold mb-3">{formation.title}</h1>
+              <p className="text-white/80 text-lg leading-relaxed">{formation.description}</p>
+            </div>
+            
+            {/* Action Button */}
+            <div className="pt-4">
+              <Button 
+                onClick={handleCreateAction} 
+                className="bg-[#00E5A0] hover:bg-[#00E5A0]/90 text-black font-medium px-6 py-2 rounded-lg"
+              >
+                <Play className="h-4 w-4 mr-2" />
+                Generar Acción formativa
               </Button>
             </div>
+            
+            {/* Stats Row */}
+            <div className="grid grid-cols-2 gap-4 pt-4">
+              <div className="flex items-center gap-2 text-white/80">
+                <Clock className="h-4 w-4" />
+                <span className="text-sm">{formation.duration}</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/80">
+                <CreditCard className="h-4 w-4" />
+                <span className="text-sm">{formation.credits} Créditos/Alumno</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/80">
+                <Users className="h-4 w-4" />
+                <span className="text-sm">{formation.students} Alumnos</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/80">
+                <Star className="h-4 w-4 fill-current" />
+                <span className="text-sm">4.7</span>
+              </div>
+            </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Course Content */}
       <Card>
