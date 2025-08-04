@@ -129,9 +129,9 @@ const Catalog = () => {
       </div>
 
       {/* Filters */}
-      <Card className="border-0 shadow-none">
+      <Card className="bg-transparent border-0 shadow-none">
         <CardContent className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-md ml-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-md">
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
               <SelectTrigger>
                 <SelectValue placeholder="Todas las categorías" />
