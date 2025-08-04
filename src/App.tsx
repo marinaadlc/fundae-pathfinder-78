@@ -15,6 +15,7 @@ import Students from "./pages/Students";
 import Settings from "./pages/Settings";
 import CreditWallet from "./pages/CreditWallet";
 import Login from "./pages/Login";
+import SetPassword from "./pages/SetPassword";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/set-password" element={<SetPassword />} />
           <Route path="/*" element={
             <Layout>
               <Routes>
