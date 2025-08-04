@@ -177,7 +177,7 @@ const Catalog = () => {
 
                 {/* Title and Description */}
                 <div className="flex-1">
-                  <h3 className="font-semibold text-lg mb-3 group-hover:text-primary transition-colors text-white">
+                  <h3 className="font-semibold text-lg mb-3 group-hover:text-white transition-colors text-white">
                     {course.title}
                   </h3>
                   <p className="text-muted-foreground text-sm mb-6 line-clamp-3">
