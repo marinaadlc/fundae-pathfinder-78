@@ -118,7 +118,7 @@ const Catalog = () => {
       {/* Main Search */}
       <div className="flex flex-col items-center justify-center py-12 space-y-8">
         <div className="text-center space-y-4">
-          <h2 className="text-4xl font-bold text-foreground">Catálogo de formaciones</h2>
+          <h2 className="text-4xl font-bold text-primary">Catálogo de formaciones</h2>
           <p className="text-xl text-muted-foreground max-w-2xl">Busca entre cientos de formaciones bonificables para tu equipo</p>
         </div>
         
