@@ -48,9 +48,9 @@ const Layout = ({
             </div>
             
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 text-sm bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">
-                <BadgeCent className="h-4 w-4 text-gray-600" />
-                <span className="font-medium text-gray-700">340 créditos disponibles</span>
+              <div className="flex items-center space-x-2 text-sm px-3 py-1.5 rounded-full border border-gray-200 bg-[293E52] bg-[#293e52]">
+                <BadgeCent className="h-4 w-4 text-gray-600 bg-inherit" />
+                <span className="font-medium text-slate-50">340 créditos disponibles</span>
               </div>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
