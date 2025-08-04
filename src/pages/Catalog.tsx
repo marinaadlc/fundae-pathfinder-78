@@ -185,8 +185,8 @@ const Catalog = () => {
                   </p>
                 </div>
 
-                {/* Footer with stats */}
-                <div className="flex items-center justify-between text-sm text-muted-foreground mt-auto">
+                {/* Footer with stats - 2x2 grid */}
+                <div className="grid grid-cols-2 gap-3 text-sm text-muted-foreground mt-auto">
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4" />
                     <span>{course.duration}</span>
@@ -196,14 +196,12 @@ const Catalog = () => {
                     <span>{course.credits} Créditos/Alumno</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span>4.7</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Users className="h-4 w-4" />
-                      <span>{course.students} Alumnos</span>
-                    </div>
+                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <span>4.7</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4" />
+                    <span>{course.students} Alumnos</span>
                   </div>
                 </div>
               </CardContent>
