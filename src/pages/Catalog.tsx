@@ -129,9 +129,9 @@ const Catalog = () => {
       </div>
 
       {/* Filters */}
-      <Card className="bg-transparent border-0 shadow-none">
+      <Card className="border-0 shadow-none">
         <CardContent className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-md">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-md ml-auto">
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
               <SelectTrigger>
                 <SelectValue placeholder="Todas las categorías" />
@@ -158,7 +158,7 @@ const Catalog = () => {
       {/* Course Grid */}
       <div className={`grid grid-cols-1 gap-6 ${filteredCourses.length === 0 ? 'md:grid-cols-1' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
         {filteredCourses.map(course => <Link key={course.id} to={`/course/${course.id}`}>
-            <Card className="group hover:shadow-lg transition-all duration-200 cursor-pointer h-full hover:bg-[#768092]">
+            <Card className="bg-[#04253D] group hover:shadow-lg transition-all duration-200 cursor-pointer h-full hover:bg-[#768092]">
               <CardContent className="p-6 h-full flex flex-col">
                 {/* Header with icon and badges */}
                 <div className="flex items-start justify-between mb-4">
