@@ -157,63 +157,58 @@ const Catalog = () => {
 
       {/* Course Grid */}
       <div className={`grid grid-cols-1 gap-6 ${filteredCourses.length === 0 ? 'md:grid-cols-1' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
-        {filteredCourses.map(course => <Card key={course.id} className="group hover:shadow-lg transition-all duration-200 cursor-pointer">
-            <Link to={`/course/${course.id}`}>
-              <CardContent className="p-0">
-                {/* Course Image Placeholder */}
-                <div className="h-48 bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center relative overflow-hidden bg-[#010118]">
-                  <BookOpen className="h-16 w-16 text-primary/60 bg-[#000a05]/0" />
-                  {course.isPopular && <div className="absolute top-3 right-3 flex items-center gap-1 bg-orange-500 text-white px-2 py-1 rounded-full text-xs">
-                      <Star className="h-3 w-3 fill-current" />
-                      <span>Popular</span>
-                    </div>}
-                </div>
-
-                <div className="p-6">
-                  {/* Category and Level */}
-                  <div className="flex items-center justify-between mb-3">
-                    <Badge variant="secondary">{course.category}</Badge>
-                    <Badge variant="outline" className={getLevelColor(course.level)}>
+        {filteredCourses.map(course => <Link key={course.id} to={`/course/${course.id}`}>
+            <Card className="group hover:shadow-lg transition-all duration-200 cursor-pointer h-full">
+              <CardContent className="p-6 h-full flex flex-col">
+                {/* Header with icon and badges */}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-amber-500">
+                    <Users className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="flex gap-2">
+                    <Badge variant="secondary" className="text-xs px-2 py-1">
+                      {course.category}
+                    </Badge>
+                    <Badge variant="outline" className="text-xs px-2 py-1">
                       {course.level}
                     </Badge>
                   </div>
+                </div>
 
-                  {/* Title and Description */}
-                  <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
+                {/* Title and Description */}
+                <div className="flex-1">
+                  <h3 className="font-semibold text-lg mb-3 group-hover:text-primary transition-colors text-white">
                     {course.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                  <p className="text-muted-foreground text-sm mb-6 line-clamp-3">
                     {course.description}
                   </p>
+                </div>
 
-                  {/* Course Stats */}
-                  <div className="grid grid-cols-2 gap-3 mb-4 text-sm">
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-muted-foreground" />
-                      <span>{course.duration}</span>
+                {/* Footer with stats */}
+                <div className="flex items-center justify-between text-sm text-muted-foreground mt-auto">
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    <span>{course.duration}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <BadgeCent className="h-4 w-4" />
+                    <span>{course.credits} Créditos/Alumno</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <span>4.7</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <BadgeCent className="h-4 w-4 text-muted-foreground" />
-                      <span>{course.credits} créditos / alumno</span>
-                    </div>
-                    <div className="flex items-center gap-1 col-span-2">
-                      <div className="flex -space-x-1">
-                        <img src={avatar1} alt="Student avatar" className="w-4 h-4 rounded-full border border-white object-cover" />
-                        <img src={avatar2} alt="Student avatar" className="w-4 h-4 rounded-full border border-white object-cover" />
-                        <img src={avatar3} alt="Student avatar" className="w-4 h-4 rounded-full border border-white object-cover" />
-                      </div>
-                      <span>{course.students.toLocaleString()} alumnos</span>
+                    <div className="flex items-center gap-1">
+                      <Users className="h-4 w-4" />
+                      <span>{course.students} Alumnos</span>
                     </div>
                   </div>
-
-                  {/* Action Button */}
-                  <Button className="w-full" variant="outline">
-                    Ver detalles
-                  </Button>
                 </div>
               </CardContent>
-            </Link>
-          </Card>)}
+            </Card>
+          </Link>)}
 
         {/* Custom Training Card - Now expands when no results */}
         <Link to="/custom-formation" className={filteredCourses.length === 0 ? 'md:col-span-2 lg:col-span-3' : ''}>
