@@ -162,7 +162,7 @@ const FormationDetail = () => {
             {/* Badges */}
             <div className="flex items-center gap-3">
               {formation.isPopular && (
-                <Badge className="bg-orange-500 hover:bg-orange-600 text-white">
+                <Badge className="bg-yellow-100 hover:bg-yellow-100 text-black">
                   <Star className="h-3 w-3 mr-1 fill-current" />
                   Popular
                 </Badge>

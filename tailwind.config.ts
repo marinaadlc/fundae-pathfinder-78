@@ -22,6 +22,50 @@ export default {
 				sans: ['Inter', 'sans-serif'],
 			},
 			colors: {
+				// Background colors
+				'background-100': 'hsl(var(--background-100))',
+				'background-200': 'hsl(var(--background-200))',
+				'background-300': 'hsl(var(--background-300))',
+				'background-400': 'hsl(var(--background-400))',
+				'background-500': 'hsl(var(--background-500))',
+				
+				// Primary colors
+				'primary-100': 'hsl(var(--primary-100))',
+				'primary-200': 'hsl(var(--primary-200))',
+				'primary-300': 'hsl(var(--primary-300))',
+				'primary-400': 'hsl(var(--primary-400))',
+				'primary-500': 'hsl(var(--primary-500))',
+				'primary-600': 'hsl(var(--primary-600))',
+				'primary-700': 'hsl(var(--primary-700))',
+				
+				// Accent colors
+				'accent-100': 'hsl(var(--accent-100))',
+				'accent-200': 'hsl(var(--accent-200))',
+				'accent-300': 'hsl(var(--accent-300))',
+				'accent-400': 'hsl(var(--accent-400))',
+				'accent-500': 'hsl(var(--accent-500))',
+				'accent-600': 'hsl(var(--accent-600))',
+				'accent-700': 'hsl(var(--accent-700))',
+				
+				// Neutral colors
+				'white-100': 'hsl(var(--white-100))',
+				'black-100': 'hsl(var(--black-100))',
+				
+				// Gray colors
+				'gray-100': 'hsl(var(--gray-100))',
+				'gray-200': 'hsl(var(--gray-200))',
+				'gray-300': 'hsl(var(--gray-300))',
+				'gray-400': 'hsl(var(--gray-400))',
+				'gray-500': 'hsl(var(--gray-500))',
+				'gray-600': 'hsl(var(--gray-600))',
+				'gray-700': 'hsl(var(--gray-700))',
+				
+				// Status colors
+				'error-100': 'hsl(var(--error-100))',
+				'warning-100': 'hsl(var(--warning-100))',
+				'success-100': 'hsl(var(--success-100))',
+				
+				// Semantic colors (existing)
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

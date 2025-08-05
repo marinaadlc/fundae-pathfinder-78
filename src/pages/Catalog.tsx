@@ -118,20 +118,25 @@ const Catalog = () => {
       {/* Main Search */}
       <div className="flex flex-col items-center justify-center py-12 space-y-8">
         <div className="text-center space-y-4">
-          <h2 className="text-4xl font-bold text-primary">Catálogo de formaciones</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl">Busca entre cientos de formaciones bonificables para tu equipo</p>
+          <h2 className="text-5xl font-extrabold text-primary">Catálogo de formaciones</h2>
+          <p className="text-xl text-white-100 max-w-2xl font-bold">Busca entre cientos de formaciones bonificables para tu equipo</p>
         </div>
         
-        <div className="w-full max-w-2xl relative">
+        <div className="w-full max-w-2xl relative ">
           <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-muted-foreground h-6 w-6" />
-          <Input placeholder="Buscar formaciones..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-16 h-16 text-lg rounded-2xl border-2 focus:border-primary shadow-lg" />
+          <Input
+            placeholder="Buscar formaciones..."
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+            className="pl-16 h-16 text-lg rounded-2xl  shadow-lg text-white placeholder-gray-400 bg-background-100"
+          />
         </div>
       </div>
 
       {/* Filters */}
-      <Card className="border-0 shadow-none">
-        <CardContent className="p-6">
-          <div className="bg-transparent grid grid-cols-1 md:grid-cols-2 gap-4 max-w-md ml-au">
+      <Card className="border-0 shadow-none bg-transparent">
+        <CardContent className="py-6">
+          <div className="bg-transparent grid grid-cols-1 md:grid-cols-2 gap-4 max-w-md">
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
               <SelectTrigger>
                 <SelectValue placeholder="Todas las categorías" />
@@ -158,7 +163,7 @@ const Catalog = () => {
       {/* Course Grid */}
       <div className={`grid grid-cols-1 gap-6 ${filteredCourses.length === 0 ? 'md:grid-cols-1' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
         {filteredCourses.map(course => <Link key={course.id} to={`/course/${course.id}`}>
-            <Card className="bg-[#04253D] group transition-all duration-200 cursor-pointer h-full hover:bg-[#768092]">
+            <Card className="bg-background-200 group transition-all duration-200 cursor-pointer h-full hover:bg-background-100 border-background-100">
               <CardContent className="p-6 h-full flex flex-col">
                 {/* Header with icon and badges */}
                 <div className="flex items-start justify-between mb-4">
@@ -210,29 +215,52 @@ const Catalog = () => {
 
         {/* Custom Training Card - Now expands when no results */}
         <Link to="/custom-formation" className={filteredCourses.length === 0 ? 'md:col-span-2 lg:col-span-3' : ''}>
-          <Card className="group hover:shadow-lg transition-all duration-200 border-dashed border-2 bg-gradient-to-br from-teal-50 to-cyan-50 border-teal-300 hover:from-teal-100 hover:to-cyan-100 hover:border-teal-400">
-            <CardContent className={`p-6 h-full flex flex-col justify-between ${filteredCourses.length === 0 ? 'text-center' : ''}`}>
-              <div>
-                <div className="flex items-center justify-center mb-4">
-                  <div className="h-16 w-16 rounded-full bg-teal-100 flex items-center justify-center">
-                    <BookOpen className="h-8 w-8 text-teal-700" />
-                  </div>
-                </div>
-                
-                <h3 className="font-semibold text-lg mb-3 text-center text-teal-900">✨ Crea tu formación personalizada</h3>
-                
-                <p className={`text-teal-800 text-sm mb-4 text-center ${filteredCourses.length === 0 ? 'text-base' : ''}`}>
-                  {filteredCourses.length === 0 ? '¿No encuentras lo que buscas? Crea una formación personalizada que se adapte exactamente a tus necesidades combinando nuestros cursos individuales.' : '¿Ninguna de nuestras formaciones encaja con lo que buscas? Crea una personalizada combinando nuestros cursos individuales.'}
-                </p>
-                
-                <div className="p-3 rounded-lg mb-4 bg-amber-100/0">
-                  <p className="text-xs text-teal-700 text-center">✨ Requiere 1 día laborable de gestión</p>
+          <Card className="group hover:shadow-lg transition-all duration-200 border-0 bg-gradient-to-b from-green-300 to-blue-500 hover:from-green-400 hover:to-blue-500 relative overflow-hidden">
+            <CardContent className={`p-6 h-full flex flex-col justify-between ${filteredCourses.length === 0 ? 'text-center' : ''} relative z-10`}>
+              {/* Icon in top right */}
+              <div className="absolute top-4 right-4">
+                <div className="w-8 h-8 flex items-center justify-center">
+                  <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 7l3-3m0 0l3 3m-3-3v18" />
+                  </svg>
                 </div>
               </div>
               
-              <Button className="w-full border-teal-500 text-teal-700 hover:bg-teal-100" variant="outline">
-                Crear formación personalizada
+              <div>
+                {/* Title in upper left */}
+                <div className="mb-4">
+                  <h3 className="font-bold text-3xl text-gray-900 leading-none">
+                    Crea tu<br />
+                    formación<br />
+                    Personalizada
+                  </h3>
+                </div>
+                
+                {/* Question and suggestion text */}
+                <div className="mb-6">
+                  <p className="text-gray-900 text-sm mb- font-semibold">
+                    ¿Ninguna de nuestras formaciones encaja con lo que buscas?
+                  </p>
+                  <p className="text-gray-900 text-sm">
+                    Crea una personalizada combinando nuestros cursos individuales.
+                  </p>
+                </div>
+                
+                
+              
+              {/* Dark button */}
+              <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 rounded-lg">
+                Crear Formación
               </Button>
+
+              {/* Disclaimer */}
+              <div className="mt-3 mb=3">
+                  <p className="text-xs text-gray-900">
+                    * Requiere 1 día laborable de gestión
+                  </p>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </Link>

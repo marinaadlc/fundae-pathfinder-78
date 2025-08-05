@@ -491,7 +491,7 @@ const CreateAction = () => {
                                  Seleccionada
                                </Badge>}
                              {formation.isPopular && <div className="flex items-center gap-1">
-                                 <Star className="h-4 w-4 text-orange-500 fill-current" />
+                                 <Star className="h-4 w-4 text-background-100 fill-yellow-100" />
                                  <span className="text-sm text-orange-600 font-medium">Popular</span>
                                </div>}
                           </div>
@@ -582,7 +582,7 @@ const CreateAction = () => {
             {/* Side panel - Formations details */}
             {selectedFormationDetail && selectedFormationDetail.subFormations && <div className="w-96">
                 <Card className="sticky top-4">
-                  <CardContent className="p-6 bg-gray-100">
+                  <CardContent className="p-6 bg-background-100">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="font-semibold">Cursos que incluye</h3>
                       <Button variant="ghost" size="sm" onClick={() => setSelectedFormationDetail(null)}>
@@ -591,7 +591,7 @@ const CreateAction = () => {
                     </div>
 
                     <div className="space-y-4 max-h-96 overflow-y-auto">                  
-                      {selectedFormationDetail.subFormations?.map((subFormation, index) => <div key={index} className="border rounded-lg p-4 bg-white">
+                      {selectedFormationDetail.subFormations?.map((subFormation, index) => <div key={index} className="border rounded-lg p-4 bg-background-100">
                           <h4 className="font-medium mb-2">{subFormation.name}</h4>
                           <p className="text-sm text-muted-foreground mb-3">{subFormation.description}</p>
                           <div className="flex items-center justify-between text-sm text-muted-foreground">

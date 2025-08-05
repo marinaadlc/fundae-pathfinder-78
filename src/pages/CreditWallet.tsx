@@ -141,7 +141,7 @@ const CreditWallet = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Badge variant="secondary" className="text-lg px-4 py-2">
-                340 créditos disponibles
+              340 créditos disponibles
               </Badge>
             </div>
             <Button onClick={handleSolicitarCreditos} className="flex items-center gap-2">

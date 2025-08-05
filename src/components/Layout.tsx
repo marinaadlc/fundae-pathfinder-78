@@ -41,16 +41,16 @@ const Layout = ({
                 <span className="text-2xl font-bold text-foreground">BonificaPro</span>
               </Link>
               <nav className="flex space-x-3">
-                {navigation.map(item => <Link key={item.name} to={item.href} className={`px-4 py-2 text-sm rounded-full transition-colors no-underline ${item.current ? "text-primary bg-primary/10 font-medium" : "text-muted-foreground hover:text-primary hover:bg-primary/5 font-normal"}`}>
+                {navigation.map(item => <Link key={item.name} to={item.href} className={`px-4 py-3 text-sm rounded-full transition-colors no-underline ${item.current ? "text-white bg-primary/20 font-medium" : "text-muted-foreground hover:text-white hover:bg-primary/5 font-normal"}`}>
                     {item.name}
                   </Link>)}
               </nav>
             </div>
             
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 text-sm px-3 py-1.5 rounded-full border border-gray-200 bg-[293E52] bg-[#293e52]">
-                <BadgeCent className="h-4 w-4 text-gray-600 bg-inherit" />
-                <span className="font-medium text-slate-50">340 créditos disponibles</span>
+              <div className="flex items-center space-x-2 text-sm px-3 py-1.5 rounded-full  bg-background-100">
+                <BadgeCent className="h-4 w-4 text-white bg-inherit" />
+                <span className="font-medium text-slate-50"><span className="font-bold">340 créditos </span>disponibles</span>
               </div>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
