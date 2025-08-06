@@ -235,6 +235,7 @@ const CreateAction = () => {
   // Step 3 states
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
+  const [actionName, setActionName] = useState<string>("");
 
   // Form for adding individual student
   const {
@@ -418,7 +419,7 @@ const CreateAction = () => {
     const newAction = {
       id: Date.now(),
       // Simple ID generation
-      name: selectedFormation?.name || "",
+      name: actionName || selectedFormation?.name || "",
       students: selectedStudents.length,
       creationDate: format(new Date(), "dd/MM/yyyy"),
       startDate: format(startDate!, "dd/MM/yyyy"),
@@ -826,6 +827,21 @@ const CreateAction = () => {
                 </div>
               </div>
 
+              {/* Nombre personalizable de la acción */}
+              <div className="space-y-2">
+                <Label htmlFor="action-name" className="text-sm font-medium">Nombre de la acción formativa *</Label>
+                <Input
+                  id="action-name"
+                  value={actionName || selectedFormation?.name || ""}
+                  onChange={(e) => setActionName(e.target.value)}
+                  placeholder="Personaliza el nombre de esta acción formativa"
+                  className="w-full"
+                />
+                <p className="text-sm text-muted-foreground">
+                  Este será el nombre que aparecerá en los listados y reportes
+                </p>
+              </div>
+
               <div className="grid grid-cols-2 gap-6">
                 {/* Fecha de inicio */}
                 <div className="space-y-2">
@@ -913,7 +929,7 @@ const CreateAction = () => {
           {currentStep === 2 && <Button className="px-8" disabled={!canProceedToNextStep()} onClick={() => setCurrentStep(3)}>
               Siguiente
             </Button>}
-          {currentStep === 3 && <Button className="px-8" disabled={!startDate || !endDate} onClick={() => setShowConfirmationDialog(true)}>
+          {currentStep === 3 && <Button className="px-8" disabled={!startDate || !endDate || (!actionName && !selectedFormation?.name)} onClick={() => setShowConfirmationDialog(true)}>
               Revisar y crear la acción
             </Button>}
         </div>
@@ -933,7 +949,7 @@ const CreateAction = () => {
             {/* Nombre de la acción */}
             <div>
               <h3 className="font-semibold mb-2">Nombre de la acción</h3>
-              <p className="text-muted-foreground">{selectedFormation?.name}</p>
+              <p className="text-muted-foreground">{actionName || selectedFormation?.name}</p>
             </div>
 
             {/* Duración */}
