@@ -375,9 +375,19 @@ const CreateAction = () => {
     const weeksNeeded = Math.ceil(totalHours / 3); // 1 week per 3 hours
     return addWeeks(start, weeksNeeded);
   };
+  const calculateMaxEndDate = (start: Date) => {
+    const totalHours = getFormationHours();
+    const weeksAllowed = Math.floor(totalHours / 2); // 1 week per 2 hours of dedication
+    return addWeeks(start, weeksAllowed);
+  };
   const isValidStartDate = (date: Date) => {
     const minDate = addBusinessDays(new Date(), 4);
     return isThursday(date) && !isBefore(date, minDate);
+  };
+  const isValidEndDate = (date: Date) => {
+    if (!startDate) return false;
+    const maxEndDate = calculateMaxEndDate(startDate);
+    return !isBefore(date, startDate) && !isBefore(maxEndDate, date);
   };
   const handleStartDateChange = (date: Date | undefined) => {
     if (date && isValidStartDate(date)) {
@@ -387,6 +397,18 @@ const CreateAction = () => {
       toast({
         title: "Fecha no válida",
         description: "La fecha de inicio debe ser un jueves con al menos 4 días de antelación",
+        variant: "destructive"
+      });
+    }
+  };
+  const handleEndDateChange = (date: Date | undefined) => {
+    if (date && isValidEndDate(date)) {
+      setEndDate(date);
+    } else if (date) {
+      const maxEndDate = calculateMaxEndDate(startDate!);
+      toast({
+        title: "Fecha no válida",
+        description: `La fecha de fin no puede ser superior a ${format(maxEndDate, "PPP", { locale: es })} (1 semana por cada 2 horas de dedicación)`,
         variant: "destructive"
       });
     }
@@ -832,19 +854,31 @@ const CreateAction = () => {
 
                 {/* Fecha de fin */}
                 <div className="space-y-2">
-                  <Label htmlFor="end-date" className="text-sm font-medium">Fecha de fin</Label>
-                  <div className="p-3 bg-muted rounded-md">
-                    <div className="flex items-center gap-2">
-                      <CalendarIcon className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm">
-                        {endDate ? format(endDate, "PPP", {
-                      locale: es
-                    }) : "Selecciona una fecha de inicio"}
-                      </span>
-                    </div>
-                  </div>
+                  <Label htmlFor="end-date" className="text-sm font-medium">Fecha de fin *</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button 
+                        variant="outline" 
+                        className={cn("w-full justify-start text-left font-normal", !endDate && "text-muted-foreground")}
+                        disabled={!startDate}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {endDate ? format(endDate, "PPP", { locale: es }) : startDate ? "Seleccionar fecha de fin" : "Primero selecciona fecha de inicio"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar 
+                        mode="single" 
+                        selected={endDate} 
+                        onSelect={handleEndDateChange} 
+                        disabled={date => !startDate || !isValidEndDate(date)}
+                        initialFocus 
+                        className="pointer-events-auto"
+                      />
+                    </PopoverContent>
+                  </Popover>
                   <p className="text-sm text-muted-foreground">
-                    Se calcula automáticamente: 1 semana por cada 3 horas de formación
+                    Máximo permitido: {startDate ? format(calculateMaxEndDate(startDate), "PPP", { locale: es }) : "1 semana por cada 2 horas de dedicación"}
                   </p>
                 </div>
               </div>
@@ -879,7 +913,7 @@ const CreateAction = () => {
           {currentStep === 2 && <Button className="px-8" disabled={!canProceedToNextStep()} onClick={() => setCurrentStep(3)}>
               Siguiente
             </Button>}
-          {currentStep === 3 && <Button className="px-8" disabled={!startDate} onClick={() => setShowConfirmationDialog(true)}>
+          {currentStep === 3 && <Button className="px-8" disabled={!startDate || !endDate} onClick={() => setShowConfirmationDialog(true)}>
               Revisar y crear la acción
             </Button>}
         </div>
